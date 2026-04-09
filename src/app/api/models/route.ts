@@ -1,0 +1,91 @@
+import { NextRequest, NextResponse } from "next/server";
+import { connectToDatabase } from "@/lib/mongodb";
+import { getAuthFromCookies } from "@/lib/auth";
+import { TalentModel } from "@/models/Model";
+import type { ApiResponse, PaginatedResponse, IModel, ModelCategory } from "@/types";
+
+const DEFAULT_LIMIT = 12;
+const VALID_CATEGORIES: ModelCategory[] = ["men", "women"];
+
+export async function GET(request: NextRequest) {
+  try {
+    await connectToDatabase();
+
+    const { searchParams } = request.nextUrl;
+    const category = searchParams.get("category") as ModelCategory | null;
+    const cursor = searchParams.get("cursor");
+    const limit = Math.min(
+      Number(searchParams.get("limit")) || DEFAULT_LIMIT,
+      50
+    );
+
+    const filter: Record<string, unknown> = {};
+
+    if (category && VALID_CATEGORIES.includes(category)) {
+      filter.category = category;
+    }
+
+    if (cursor) {
+      filter._id = { $gt: cursor };
+    }
+
+    const models = await TalentModel.find(filter)
+      .sort({ _id: 1 })
+      .limit(limit + 1)
+      .lean<IModel[]>();
+
+    const hasMore = models.length > limit;
+    const items = hasMore ? models.slice(0, limit) : models;
+    const nextCursor = hasMore
+      ? items[items.length - 1]._id.toString()
+      : null;
+
+    return NextResponse.json<ApiResponse<PaginatedResponse<IModel>>>({
+      success: true,
+      data: { items, nextCursor },
+    });
+  } catch (error) {
+    return NextResponse.json<ApiResponse>(
+      {
+        success: false,
+        error: error instanceof Error ? error.message : "Failed to fetch models",
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function POST(request: NextRequest) {
+  try {
+    const auth = await getAuthFromCookies();
+    if (!auth) {
+      return NextResponse.json<ApiResponse>(
+        { success: false, error: "Not authenticated" },
+        { status: 401 }
+      );
+    }
+
+    await connectToDatabase();
+    const body = await request.json();
+
+    const talentModel = await TalentModel.create(body);
+
+    return NextResponse.json<ApiResponse<IModel>>(
+      { success: true, data: talentModel.toObject() },
+      { status: 201 }
+    );
+  } catch (error) {
+    const message =
+      error instanceof Error ? error.message : "Failed to create model";
+
+    const status =
+      error instanceof Error && error.message.includes("duplicate")
+        ? 409
+        : 500;
+
+    return NextResponse.json<ApiResponse>(
+      { success: false, error: message },
+      { status }
+    );
+  }
+}
