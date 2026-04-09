@@ -9,13 +9,19 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@vercel/blob": "^2.3.3",
+    "bcrypt": "^6.0.0",
+    "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.4.1",
     "next": "^15.5.15",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "sass": "^1.99.0"
+    "sass": "^1.99.0",
+    "slugify": "^1.6.9"
   },
   "devDependencies": {
+    "@types/bcrypt": "^6.0.0",
+    "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
