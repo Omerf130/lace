@@ -2,12 +2,12 @@
 
 import { useState, useEffect, useRef } from "react";
 import ModelCard from "@/components/ModelCard/ModelCard";
-import type { IModel } from "@/types";
+import type { SerializedModel } from "@/types";
 import styles from "./SearchInput.module.scss";
 
 export default function SearchInput() {
   const [query, setQuery] = useState("");
-  const [results, setResults] = useState<IModel[]>([]);
+  const [results, setResults] = useState<SerializedModel[]>([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
   const debounceRef = useRef<NodeJS.Timeout>(null);
@@ -65,7 +65,7 @@ export default function SearchInput() {
       {results.length > 0 && (
         <div className={styles.results}>
           {results.map((model) => (
-            <ModelCard key={model._id.toString()} model={model} />
+            <ModelCard key={model._id} model={model} />
           ))}
         </div>
       )}

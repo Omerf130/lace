@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import { connectToDatabase } from "@/lib/mongodb";
+import { serializeModels } from "@/lib/serialize";
 import { TalentModel } from "@/models/Model";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -17,7 +18,7 @@ interface CategoryPageProps {
 export async function generateMetadata({ params }: CategoryPageProps) {
   const { category } = await params;
   const label = category === "women" ? "Women" : "Men";
-  return { title: `${label} — LACE` };
+  return { title: label };
 }
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
@@ -35,8 +36,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     .lean<IModel[]>();
 
   const hasMore = models.length > PAGE_SIZE;
-  const items = hasMore ? models.slice(0, PAGE_SIZE) : models;
-  const nextCursor = hasMore ? items[items.length - 1]._id.toString() : null;
+  const raw = hasMore ? models.slice(0, PAGE_SIZE) : models;
+  const items = serializeModels(raw);
+  const nextCursor = hasMore ? items[items.length - 1]._id : null;
 
   const label = category === "women" ? "Women" : "Men";
 

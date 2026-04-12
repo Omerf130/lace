@@ -4,7 +4,7 @@ import Footer from "@/components/Footer/Footer";
 import styles from "./page.module.scss";
 
 export const metadata = {
-  title: "Menu — LACE",
+  title: "Menu",
 };
 
 export default function MenuPage() {

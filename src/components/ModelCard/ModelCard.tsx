@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { IModel } from "@/types";
+import type { SerializedModel } from "@/types";
 import styles from "./ModelCard.module.scss";
 
 interface ModelCardProps {
-  model: IModel;
+  model: SerializedModel;
 }
 
 export default function ModelCard({ model }: ModelCardProps) {

@@ -1,0 +1,41 @@
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.main {
+  @include flex-center;
+  @include flex-col;
+  min-height: 100vh;
+  gap: $space-4;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-light;
+  letter-spacing: $letter-spacing-wide;
+}
+
+.message {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  max-width: 400px;
+  text-align: center;
+}
+
+.button {
+  margin-top: $space-4;
+  padding: $space-3 $space-6;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text-light;
+  background: $color-dark;
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: opacity $transition-base;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}

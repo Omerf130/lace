@@ -13,8 +13,18 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "LACE",
-  description: "LACE Models Agency",
+  title: {
+    default: "LACE",
+    template: "%s — LACE",
+  },
+  description: "LACE — a boutique models agency representing curated talent worldwide.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
+  openGraph: {
+    type: "website",
+    siteName: "LACE",
+    title: "LACE",
+    description: "A boutique models agency representing curated talent worldwide.",
+  },
 };
 
 export default function RootLayout({

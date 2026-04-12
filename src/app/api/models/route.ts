@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "@/lib/mongodb";
 import { getAuthFromCookies } from "@/lib/auth";
 import { TalentModel } from "@/models/Model";
@@ -69,6 +70,9 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
 
     const talentModel = await TalentModel.create(body);
+
+    revalidatePath("/models/men");
+    revalidatePath("/models/women");
 
     return NextResponse.json<ApiResponse<IModel>>(
       { success: true, data: talentModel.toObject() },

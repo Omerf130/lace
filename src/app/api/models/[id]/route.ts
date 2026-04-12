@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "@/lib/mongodb";
 import { getAuthFromCookies } from "@/lib/auth";
 import { deleteImage } from "@/lib/blob";
@@ -66,6 +67,9 @@ export async function PUT(
     Object.assign(talentModel, body);
     await talentModel.save();
 
+    revalidatePath(`/models/${talentModel.category}/${talentModel.slug}`);
+    revalidatePath(`/models/${talentModel.category}`);
+
     return NextResponse.json<ApiResponse<IModel>>({
       success: true,
       data: talentModel.toObject(),
@@ -114,8 +118,14 @@ export async function DELETE(
       imagesToDelete.push(...talentModel.images.gallery);
     }
 
+    const category = talentModel.category;
+
     await Promise.allSettled(imagesToDelete.map(deleteImage));
     await TalentModel.findByIdAndDelete(id);
+
+    revalidatePath(`/models/${category}`);
+    revalidatePath("/models/men");
+    revalidatePath("/models/women");
 
     return NextResponse.json<ApiResponse>({ success: true });
   } catch (error) {

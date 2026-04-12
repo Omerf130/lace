@@ -1,0 +1,59 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+@mixin skeleton {
+  background: linear-gradient(
+    90deg,
+    $color-background-alt 25%,
+    #eaeaea 50%,
+    $color-background-alt 75%
+  );
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: $border-radius-sm;
+}
+
+.main {
+  @include container;
+  padding-top: calc(#{$navbar-height} + #{$space-10});
+  padding-bottom: $space-16;
+}
+
+.titleSkeleton {
+  @include skeleton;
+  width: 80px;
+  height: 12px;
+  margin-bottom: $space-10;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4 $space-3;
+
+  @include md { grid-template-columns: repeat(3, 1fr); }
+  @include lg { grid-template-columns: repeat(4, 1fr); }
+}
+
+.card {
+  @include flex-col;
+  gap: $space-3;
+}
+
+.imageSkeleton {
+  @include skeleton;
+  aspect-ratio: 3 / 4;
+  width: 100%;
+}
+
+.nameSkeleton {
+  @include skeleton;
+  width: 60%;
+  height: 10px;
+  margin: 0 auto;
+}

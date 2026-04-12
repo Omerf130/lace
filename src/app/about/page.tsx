@@ -3,7 +3,8 @@ import Footer from "@/components/Footer/Footer";
 import styles from "./page.module.scss";
 
 export const metadata = {
-  title: "About — LACE",
+  title: "About",
+  description: "Learn about LACE — a boutique models agency representing curated talent worldwide.",
 };
 
 export default function AboutPage() {

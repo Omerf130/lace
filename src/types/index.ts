@@ -64,3 +64,17 @@ export interface IModel {
 
 export type CreateModelInput = Omit<IModel, "_id" | "slug" | "createdAt" | "updatedAt">;
 export type UpdateModelInput = Partial<CreateModelInput>;
+
+// Serialized version safe for passing from Server to Client Components
+export interface SerializedModel {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  slug: string;
+  category: ModelCategory;
+  bio: string;
+  images: ModelImages;
+  attributes: ModelAttributes;
+  createdAt: string;
+  updatedAt: string;
+}

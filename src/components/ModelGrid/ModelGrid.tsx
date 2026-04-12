@@ -2,11 +2,11 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import ModelCard from "@/components/ModelCard/ModelCard";
-import type { IModel, ModelCategory } from "@/types";
+import type { SerializedModel, ModelCategory } from "@/types";
 import styles from "./ModelGrid.module.scss";
 
 interface ModelGridProps {
-  initialModels: IModel[];
+  initialModels: SerializedModel[];
   initialCursor: string | null;
   category: ModelCategory;
 }
@@ -16,7 +16,7 @@ export default function ModelGrid({
   initialCursor,
   category,
 }: ModelGridProps) {
-  const [models, setModels] = useState<IModel[]>(initialModels);
+  const [models, setModels] = useState<SerializedModel[]>(initialModels);
   const [cursor, setCursor] = useState<string | null>(initialCursor);
   const [loading, setLoading] = useState(false);
   const observerRef = useRef<HTMLDivElement>(null);
@@ -71,7 +71,7 @@ export default function ModelGrid({
     <>
       <div className={styles.grid}>
         {models.map((model) => (
-          <ModelCard key={model._id.toString()} model={model} />
+          <ModelCard key={model._id} model={model} />
         ))}
       </div>
 

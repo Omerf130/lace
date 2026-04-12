@@ -20,17 +20,22 @@ export async function generateMetadata({ params }: ModelPageProps) {
   const { category, slug } = await params;
 
   if (!VALID_CATEGORIES.includes(category as ModelCategory)) {
-    return { title: "Not Found — LACE" };
+    return { title: "Not Found" };
   }
 
   await connectToDatabase();
   const model = await TalentModel.findOne({ slug, category }).lean<IModel>();
 
-  if (!model) return { title: "Not Found — LACE" };
+  if (!model) return { title: "Not Found" };
 
   return {
-    title: `${model.firstName} ${model.lastName} — LACE`,
+    title: `${model.firstName} ${model.lastName}`,
     description: model.bio || `${model.firstName} ${model.lastName} at LACE Models`,
+    openGraph: {
+      title: `${model.firstName} ${model.lastName}`,
+      description: model.bio || `${model.firstName} ${model.lastName} at LACE Models`,
+      images: model.images.main ? [{ url: model.images.main }] : [],
+    },
   };
 }
 
