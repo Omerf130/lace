@@ -1,0 +1,60 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.navbar {
+  @include flex-between;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $navbar-height;
+  padding-inline: $space-6;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(8px);
+  z-index: $z-sticky;
+  border-bottom: 1px solid $color-border;
+
+  @include md {
+    padding-inline: $space-10;
+  }
+}
+
+.logo {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-widest;
+  color: $color-text;
+  text-transform: uppercase;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: $space-6;
+
+  @include md {
+    gap: $space-8;
+  }
+}
+
+.link {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  transition: color $transition-base;
+
+  &:hover {
+    opacity: 1;
+    color: $color-text;
+  }
+}
+
+.active {
+  color: $color-text;
+}

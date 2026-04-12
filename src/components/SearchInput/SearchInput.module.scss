@@ -1,0 +1,59 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.wrapper {
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  padding: $space-4 0;
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-light;
+  letter-spacing: $letter-spacing-tight;
+  border: none;
+  border-bottom: 1px solid $color-border;
+  background: transparent;
+  color: $color-text;
+  outline: none;
+  transition: border-color $transition-base;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: $color-text;
+  }
+
+  @include md {
+    font-size: $font-size-4xl;
+  }
+}
+
+.loading,
+.empty {
+  padding: $space-12 0;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4 $space-3;
+  margin-top: $space-10;
+
+  @include md {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-6 $space-4;
+  }
+
+  @include lg {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-8 $space-5;
+  }
+}

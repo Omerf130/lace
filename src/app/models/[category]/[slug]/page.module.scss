@@ -1,0 +1,85 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.main {
+  padding-top: $navbar-height;
+  min-height: 100vh;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+
+  @include lg {
+    grid-template-columns: 1fr 380px;
+  }
+}
+
+.media {
+  @include flex-col;
+  gap: $space-1;
+}
+
+.mainImage {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: $color-background-alt;
+}
+
+.image {
+  object-fit: cover;
+}
+
+.info {
+  @include flex-col;
+  padding: $space-8 $space-6;
+  gap: $space-6;
+
+  @include lg {
+    padding: $space-10 $space-8;
+    position: sticky;
+    top: $navbar-height;
+    height: fit-content;
+    max-height: calc(100vh - #{$navbar-height});
+    overflow-y: auto;
+  }
+}
+
+.name {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-normal;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+}
+
+.bio {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+}
+
+.attributes {
+  @include flex-col;
+  gap: 0;
+  border-top: 1px solid $color-border;
+}
+
+.attr {
+  @include flex-between;
+  padding: $space-3 0;
+  border-bottom: 1px solid $color-border;
+}
+
+.attrLabel {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.attrValue {
+  font-size: $font-size-sm;
+  color: $color-text;
+}

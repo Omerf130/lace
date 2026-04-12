@@ -1,0 +1,43 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.main {
+  @include container;
+  padding-top: calc(#{$navbar-height} + #{$space-16});
+  padding-bottom: $space-16;
+  min-height: 100vh;
+}
+
+.content {
+  max-width: 640px;
+}
+
+.title {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $space-10;
+}
+
+.text {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-light;
+  line-height: $line-height-relaxed;
+  color: $color-text;
+  margin-bottom: $space-6;
+}
+
+.contact {
+  margin-top: $space-16;
+}
+
+.subtitle {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $space-4;
+}

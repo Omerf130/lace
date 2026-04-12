@@ -1,0 +1,20 @@
+import Navbar from "@/components/Navbar/Navbar";
+import Footer from "@/components/Footer/Footer";
+import SearchInput from "@/components/SearchInput/SearchInput";
+import styles from "./page.module.scss";
+
+export const metadata = {
+  title: "Search — LACE",
+};
+
+export default function SearchPage() {
+  return (
+    <>
+      <Navbar />
+      <main className={styles.main}>
+        <SearchInput />
+      </main>
+      <Footer />
+    </>
+  );
+}

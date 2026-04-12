@@ -1,0 +1,85 @@
+"use client";
+
+import { useState, useEffect, useRef, useCallback } from "react";
+import ModelCard from "@/components/ModelCard/ModelCard";
+import type { IModel, ModelCategory } from "@/types";
+import styles from "./ModelGrid.module.scss";
+
+interface ModelGridProps {
+  initialModels: IModel[];
+  initialCursor: string | null;
+  category: ModelCategory;
+}
+
+export default function ModelGrid({
+  initialModels,
+  initialCursor,
+  category,
+}: ModelGridProps) {
+  const [models, setModels] = useState<IModel[]>(initialModels);
+  const [cursor, setCursor] = useState<string | null>(initialCursor);
+  const [loading, setLoading] = useState(false);
+  const observerRef = useRef<HTMLDivElement>(null);
+
+  const loadMore = useCallback(async () => {
+    if (loading || !cursor) return;
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        `/api/models?category=${category}&cursor=${cursor}&limit=12`
+      );
+      const json = await res.json();
+
+      if (json.success && json.data) {
+        setModels((prev) => [...prev, ...json.data.items]);
+        setCursor(json.data.nextCursor);
+      }
+    } catch {
+      // Silently fail — user can scroll to retry
+    } finally {
+      setLoading(false);
+    }
+  }, [cursor, category, loading]);
+
+  useEffect(() => {
+    const el = observerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMore();
+        }
+      },
+      { rootMargin: "200px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loadMore]);
+
+  if (models.length === 0) {
+    return (
+      <div className={styles.empty}>
+        <p>No models found.</p>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <div className={styles.grid}>
+        {models.map((model) => (
+          <ModelCard key={model._id.toString()} model={model} />
+        ))}
+      </div>
+
+      {cursor && (
+        <div ref={observerRef} className={styles.loader}>
+          {loading && <span className={styles.dot} />}
+        </div>
+      )}
+    </>
+  );
+}

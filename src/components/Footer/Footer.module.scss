@@ -1,0 +1,25 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.footer {
+  @include flex-between;
+  padding: $space-6 $space-6;
+  border-top: 1px solid $color-border;
+  margin-top: auto;
+
+  @include md {
+    padding: $space-8 $space-10;
+  }
+}
+
+.brand {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+}
+
+.copy {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}

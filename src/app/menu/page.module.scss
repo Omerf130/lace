@@ -1,0 +1,48 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.main {
+  min-height: 100vh;
+  padding-top: $navbar-height;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: calc(100vh - #{$navbar-height});
+
+  @include md {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.category {
+  @include flex-center;
+  min-height: 50vh;
+  text-decoration: none;
+  color: $color-text;
+  border-bottom: 1px solid $color-border;
+  transition: background $transition-base, color $transition-base;
+
+  &:hover {
+    background: $color-dark;
+    color: $color-text-light;
+    opacity: 1;
+  }
+
+  @include md {
+    min-height: auto;
+    border-bottom: none;
+
+    &:first-child {
+      border-right: 1px solid $color-border;
+    }
+  }
+}
+
+.label {
+  font-size: $font-size-5xl;
+  font-weight: $font-weight-light;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+}

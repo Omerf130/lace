@@ -1,0 +1,18 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.main {
+  @include container;
+  padding-top: calc(#{$navbar-height} + #{$space-10});
+  padding-bottom: $space-16;
+  min-height: 100vh;
+}
+
+.title {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-bottom: $space-10;
+}

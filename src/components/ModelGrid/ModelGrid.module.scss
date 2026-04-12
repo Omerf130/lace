@@ -1,0 +1,46 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4 $space-3;
+
+  @include md {
+    grid-template-columns: repeat(3, 1fr);
+    gap: $space-6 $space-4;
+  }
+
+  @include lg {
+    grid-template-columns: repeat(4, 1fr);
+    gap: $space-8 $space-5;
+  }
+}
+
+.empty {
+  @include flex-center;
+  min-height: 40vh;
+  color: $color-text-muted;
+  font-size: $font-size-sm;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+}
+
+.loader {
+  @include flex-center;
+  padding: $space-12 0;
+  min-height: 60px;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  background: $color-text;
+  border-radius: $border-radius-full;
+  animation: pulse 1s ease infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
