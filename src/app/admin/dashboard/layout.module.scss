@@ -1,0 +1,87 @@
+@use "../../../styles/variables" as *;
+@use "../../../styles/mixins" as *;
+
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  @include flex-col;
+  width: 220px;
+  padding: $space-6;
+  background: $color-dark;
+  color: $color-text-light;
+  flex-shrink: 0;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: $z-sticky;
+}
+
+.logo {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-widest;
+  color: $color-text-light;
+  margin-bottom: $space-10;
+
+  &:hover {
+    opacity: 0.8;
+  }
+}
+
+.nav {
+  @include flex-col;
+  gap: $space-1;
+  flex: 1;
+}
+
+.navLink {
+  display: block;
+  padding: $space-3 $space-4;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  letter-spacing: $letter-spacing-wide;
+  color: rgba(255, 255, 255, 0.6);
+  border-radius: $border-radius-md;
+  transition: background $transition-fast, color $transition-fast;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-text-light;
+    opacity: 1;
+  }
+}
+
+.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: $color-text-light;
+}
+
+.logout {
+  padding: $space-3 $space-4;
+  font-size: $font-size-xs;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+  text-align: left;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-text-light;
+  }
+}
+
+.content {
+  flex: 1;
+  margin-left: 220px;
+  padding: $space-8;
+  background: $color-background-alt;
+  min-height: 100vh;
+
+  @include lg {
+    padding: $space-10;
+  }
+}

@@ -1,0 +1,119 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import type { IModel } from "@/types";
+import styles from "./page.module.scss";
+
+export default function DashboardPage() {
+  const [models, setModels] = useState<IModel[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [deleting, setDeleting] = useState<string | null>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    fetchModels();
+  }, []);
+
+  async function fetchModels() {
+    try {
+      const res = await fetch("/api/models?limit=200");
+      const data = await res.json();
+      if (data.success) {
+        setModels(data.data.items);
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function handleDelete(id: string, name: string) {
+    if (!confirm(`Delete ${name}? This cannot be undone.`)) return;
+
+    setDeleting(id);
+    try {
+      const res = await fetch(`/api/models/${id}`, { method: "DELETE" });
+      const data = await res.json();
+      if (data.success) {
+        setModels((prev) => prev.filter((m) => m._id.toString() !== id));
+      }
+    } finally {
+      setDeleting(null);
+    }
+  }
+
+  if (loading) {
+    return <div className={styles.loading}>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <div className={styles.header}>
+        <h1 className={styles.title}>Models</h1>
+        <Link href="/admin/dashboard/new" className={styles.addButton}>
+          + New Model
+        </Link>
+      </div>
+
+      {models.length === 0 ? (
+        <div className={styles.empty}>
+          <p>No models yet.</p>
+          <Link href="/admin/dashboard/new" className={styles.addLink}>
+            Create your first model
+          </Link>
+        </div>
+      ) : (
+        <div className={styles.table}>
+          <div className={styles.tableHeader}>
+            <span className={styles.colImage} />
+            <span className={styles.colName}>Name</span>
+            <span className={styles.colCategory}>Category</span>
+            <span className={styles.colActions}>Actions</span>
+          </div>
+
+          {models.map((model) => {
+            const id = model._id.toString();
+            const fullName = `${model.firstName} ${model.lastName}`;
+
+            return (
+              <div key={id} className={styles.row}>
+                <div className={styles.colImage}>
+                  {model.images.main ? (
+                    <Image
+                      src={model.images.main}
+                      alt={fullName}
+                      width={48}
+                      height={64}
+                      className={styles.thumb}
+                    />
+                  ) : (
+                    <div className={styles.thumbPlaceholder} />
+                  )}
+                </div>
+                <span className={styles.colName}>{fullName}</span>
+                <span className={styles.colCategory}>{model.category}</span>
+                <div className={styles.colActions}>
+                  <button
+                    onClick={() => router.push(`/admin/dashboard/${id}`)}
+                    className={styles.editBtn}
+                  >
+                    Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(id, fullName)}
+                    className={styles.deleteBtn}
+                    disabled={deleting === id}
+                  >
+                    {deleting === id ? "..." : "Delete"}
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}

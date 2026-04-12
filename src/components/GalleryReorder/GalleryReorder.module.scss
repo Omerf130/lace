@@ -1,0 +1,76 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.item {
+  position: relative;
+  cursor: grab;
+  border: 2px solid transparent;
+  border-radius: $border-radius-md;
+  transition: border-color $transition-fast, opacity $transition-fast;
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:hover {
+    border-color: $color-border;
+  }
+}
+
+.dragging {
+  opacity: 0.4;
+  border-color: $color-text;
+}
+
+.thumb {
+  width: 100px;
+  height: 133px;
+  object-fit: cover;
+  border-radius: $border-radius-sm;
+  display: block;
+}
+
+.index {
+  position: absolute;
+  bottom: 4px;
+  left: 4px;
+  width: 20px;
+  height: 20px;
+  font-size: 10px;
+  @include flex-center;
+  background: rgba(0, 0, 0, 0.6);
+  color: $color-text-light;
+  border-radius: $border-radius-full;
+}
+
+.removeBtn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  height: 22px;
+  font-size: 14px;
+  line-height: 1;
+  @include flex-center;
+  background: $color-dark;
+  color: $color-text-light;
+  border: none;
+  border-radius: $border-radius-full;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity $transition-fast;
+
+  .item:hover & {
+    opacity: 1;
+  }
+
+  &:hover {
+    background: $color-error;
+  }
+}

@@ -1,0 +1,18 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-tight;
+  margin-bottom: $space-8;
+}
+
+.status {
+  @include flex-center;
+  min-height: 40vh;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+}
