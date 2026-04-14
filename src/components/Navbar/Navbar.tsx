@@ -16,6 +16,22 @@ export default function Navbar() {
         LACE
       </Link>
 
+      <Link href="/search" className={styles.search} aria-label="Search">
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="11" cy="11" r="8" />
+          <line x1="21" y1="21" x2="16.65" y2="16.65" />
+        </svg>
+      </Link>
+
       <div className={styles.links}>
         <Link
           href="/models/women"
@@ -28,12 +44,6 @@ export default function Navbar() {
           className={`${styles.link} ${isActive("/models/men") ? styles.active : ""}`}
         >
           Men
-        </Link>
-        <Link
-          href="/search"
-          className={`${styles.link} ${isActive("/search") ? styles.active : ""}`}
-        >
-          Search
         </Link>
         <Link
           href="/about"
