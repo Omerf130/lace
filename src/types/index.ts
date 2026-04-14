@@ -59,7 +59,6 @@ export interface IModel {
   slug: string;
   category: ModelCategory;
   status: ModelStatus;
-  bio: string;
   instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;
@@ -78,7 +77,6 @@ export interface SerializedModel {
   slug: string;
   category: ModelCategory;
   status: ModelStatus;
-  bio: string;
   instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;

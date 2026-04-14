@@ -18,7 +18,6 @@ interface FormState {
   firstName: string;
   lastName: string;
   category: ModelCategory;
-  bio: string;
   instagramUrl: string;
   mainImage: string;
   gallery: string[];
@@ -38,7 +37,6 @@ function getInitial(data?: IModel): FormState {
     firstName: data?.firstName ?? "",
     lastName: data?.lastName ?? "",
     category: data?.category ?? "women",
-    bio: data?.bio ?? "",
     instagramUrl: data?.instagramUrl ?? "",
     mainImage: data?.images.main ?? "",
     gallery: data?.images.gallery ?? [],
@@ -81,7 +79,6 @@ export default function ModelForm({ initialData }: ModelFormProps) {
       lastName: capitalizeWords(form.lastName.trim()),
       category: form.category,
       status,
-      bio: form.bio.trim(),
       instagramUrl: form.instagramUrl.trim(),
       images: {
         main: form.mainImage,
@@ -172,16 +169,6 @@ export default function ModelForm({ initialData }: ModelFormProps) {
             <option value="women">Women</option>
             <option value="men">Men</option>
           </select>
-        </label>
-
-        <label className={styles.field}>
-          <span className={styles.label}>Bio</span>
-          <textarea
-            value={form.bio}
-            onChange={(e) => update("bio", e.target.value)}
-            className={styles.textarea}
-            rows={4}
-          />
         </label>
 
         <label className={styles.field}>

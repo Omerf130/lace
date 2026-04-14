@@ -2,99 +2,59 @@
 @use "../../../../styles/mixins" as *;
 
 .main {
-  padding: $navbar-height 20px 0;
+  padding: $navbar-height 0 0;
   min-height: 100vh;
 }
 
-.hero {
-  display: grid;
-  grid-template-columns: 1fr;
-
-  @include lg {
-    grid-template-columns: 1fr 380px;
-  }
-}
-
-.mainImage {
-  position: relative;
-  aspect-ratio: 3 / 4;
-  max-height: 75vh;
-  overflow: hidden;
-  background: $color-background-alt;
-}
-
-.image {
-  object-fit: cover;
-}
-
-.info {
-  @include flex-col;
-  padding: $space-8 $space-6;
-  gap: $space-6;
-
-  @include lg {
-    padding: $space-10 $space-8;
-    overflow-y: auto;
-  }
-}
-
 .name {
-  font-size: $font-size-2xl;
+  font-size: clamp(2rem, 5vw, 3.5rem);
   font-weight: $font-weight-normal;
   letter-spacing: $letter-spacing-wide;
   text-transform: uppercase;
+  text-align: center;
+  margin: $space-8 0 $space-4;
 }
 
-.bio {
-  font-size: $font-size-sm;
-  color: $color-text-muted;
-  line-height: $line-height-relaxed;
+.links {
+  display: flex;
+  justify-content: center;
+  gap: $space-6;
+  margin-bottom: $space-4;
 }
 
-.attributes {
-  @include flex-col;
-  gap: 0;
-  border-top: 1px solid $color-border;
-}
-
-.attr {
-  @include flex-between;
-  padding: $space-3 0;
-  border-bottom: 1px solid $color-border;
-}
-
-.attrLabel {
+.link {
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
   letter-spacing: $letter-spacing-wider;
   text-transform: uppercase;
   color: $color-text-muted;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.attributes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: $space-4 $space-6;
+  margin-bottom: $space-8;
+}
+
+.attr {
+  font-size: $font-size-xs;
+  letter-spacing: $letter-spacing-wide;
+  color: $color-text-muted;
+}
+
+.attrLabel {
+  text-transform: uppercase;
 }
 
 .attrValue {
-  font-size: $font-size-sm;
+  font-weight: $font-weight-bold;
   color: $color-text;
-}
-
-.links {
-  display: flex;
-  gap: $space-2;
-  margin-top: $space-2;
-}
-
-.link {
-  display: inline-flex;
-  align-items: center;
-  padding: $space-2 $space-5;
-  font-size: $font-size-xs;
-  font-weight: $font-weight-medium;
-  letter-spacing: $letter-spacing-widest;
   text-transform: uppercase;
-  color: $color-text;
-  border: 1px solid $color-border;
-  transition: background $transition-fast;
-
-  &:hover {
-    background: $color-background-alt;
-  }
 }

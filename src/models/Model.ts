@@ -19,7 +19,6 @@ const ModelSchema = new Schema<IModel>(
       default: "draft",
       index: true,
     },
-    bio: { type: String, default: "" },
     instagramUrl: { type: String, default: "" },
     images: {
       main: { type: String, default: "" },

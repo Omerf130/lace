@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Image from "next/image";
 import { connectToDatabase } from "@/lib/mongodb";
 import { TalentModel } from "@/models/Model";
 import Navbar from "@/components/Navbar/Navbar";
@@ -28,12 +27,14 @@ export async function generateMetadata({ params }: ModelPageProps) {
 
   if (!model) return { title: "Not Found" };
 
+  const fullName = `${model.firstName} ${model.lastName}`;
+
   return {
-    title: `${model.firstName} ${model.lastName}`,
-    description: model.bio || `${model.firstName} ${model.lastName} at LACE Models`,
+    title: fullName,
+    description: `${fullName} at LACE Models`,
     openGraph: {
-      title: `${model.firstName} ${model.lastName}`,
-      description: model.bio || `${model.firstName} ${model.lastName} at LACE Models`,
+      title: fullName,
+      description: `${fullName} at LACE Models`,
       images: model.images.main ? [{ url: model.images.main }] : [],
     },
   };
@@ -58,40 +59,7 @@ export default async function ModelPage({ params }: ModelPageProps) {
     <>
       <Navbar />
       <main className={styles.main}>
-        <div className={styles.hero}>
-          {model.images.main && (
-            <div className={styles.mainImage}>
-              <Image
-                src={model.images.main}
-                alt={fullName}
-                fill
-                sizes="(max-width: 768px) 100vw, 55vw"
-                className={styles.image}
-                priority
-              />
-            </div>
-          )}
-
-          <aside className={styles.info}>
-            <h1 className={styles.name}>{fullName}</h1>
-
-            {model.bio && <p className={styles.bio}>{model.bio}</p>}
-
-            <div className={styles.attributes}>
-              {attrs.height > 0 && <Attr label="Height" value={`${attrs.height} cm`} />}
-              {attrs.bust > 0 && <Attr label="Bust" value={`${attrs.bust} cm`} />}
-              {attrs.waist > 0 && <Attr label="Waist" value={`${attrs.waist} cm`} />}
-              {attrs.hips > 0 && <Attr label="Hips" value={`${attrs.hips} cm`} />}
-              {attrs.shoes > 0 && <Attr label="Shoes" value={`${attrs.shoes}`} />}
-              {attrs.hair && <Attr label="Hair" value={attrs.hair} />}
-              {attrs.eyes && <Attr label="Eyes" value={attrs.eyes} />}
-            </div>
-          </aside>
-        </div>
-
-        {model.images.gallery.length > 0 && (
-          <GallerySlider images={model.images.gallery} alt={fullName} />
-        )}
+        <h1 className={styles.name}>{fullName}</h1>
 
         {(model.images.pdf || model.instagramUrl) && (
           <div className={styles.links}>
@@ -117,6 +85,26 @@ export default async function ModelPage({ params }: ModelPageProps) {
             )}
           </div>
         )}
+
+        <div className={styles.attributes}>
+          {attrs.height > 0 && <Attr label="Height" value={`${attrs.height} cm`} />}
+          {attrs.bust > 0 && <Attr label="Bust" value={`${attrs.bust}`} />}
+          {attrs.waist > 0 && <Attr label="Waist" value={`${attrs.waist}`} />}
+          {attrs.hips > 0 && <Attr label="Hips" value={`${attrs.hips}`} />}
+          {attrs.shoes > 0 && <Attr label="Shoes" value={`${attrs.shoes}`} />}
+          {attrs.hair && <Attr label="Hair" value={attrs.hair} />}
+          {attrs.eyes && <Attr label="Eyes" value={attrs.eyes} />}
+        </div>
+
+        {(() => {
+          const allImages = [
+            ...(model.images.main ? [model.images.main] : []),
+            ...model.images.gallery,
+          ];
+          return allImages.length > 0 ? (
+            <GallerySlider images={allImages} alt={fullName} />
+          ) : null;
+        })()}
       </main>
       <Footer />
     </>
@@ -125,9 +113,9 @@ export default async function ModelPage({ params }: ModelPageProps) {
 
 function Attr({ label, value }: { label: string; value: string }) {
   return (
-    <div className={styles.attr}>
-      <span className={styles.attrLabel}>{label}</span>
+    <span className={styles.attr}>
+      <span className={styles.attrLabel}>{label}</span>{" "}
       <span className={styles.attrValue}>{value}</span>
-    </div>
+    </span>
   );
 }
