@@ -2,53 +2,30 @@
 @use "../../styles/mixins" as *;
 
 .slider {
-  position: relative;
-  width: 100%;
+  margin: 200px 0;
+
+  :global {
+    .swiper-button-prev,
+    .swiper-button-next {
+      color: #fff;
+      width: 32px;
+      height: 32px;
+
+      &::after {
+        font-size: $font-size-base;
+        font-weight: $font-weight-bold;
+      }
+    }
+  }
 }
 
-.imageWrapper {
+.slide {
   position: relative;
-  aspect-ratio: 3 / 4;
+  aspect-ratio: 4 / 5;
   overflow: hidden;
   background: $color-background-alt;
 }
 
 .image {
   object-fit: cover;
-}
-
-.arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  padding: $space-3;
-  font-size: $font-size-xl;
-  color: $color-text-light;
-  background: rgba(0, 0, 0, 0.3);
-  border: none;
-  cursor: pointer;
-  transition: background $transition-fast;
-  z-index: 2;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.6);
-  }
-}
-
-.arrowLeft {
-  left: 0;
-}
-
-.arrowRight {
-  right: 0;
-}
-
-.counter {
-  position: absolute;
-  bottom: $space-4;
-  right: $space-4;
-  font-size: $font-size-xs;
-  color: $color-text-light;
-  letter-spacing: $letter-spacing-wide;
-  z-index: 2;
 }

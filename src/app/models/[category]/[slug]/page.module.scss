@@ -2,11 +2,11 @@
 @use "../../../../styles/mixins" as *;
 
 .main {
-  padding-top: $navbar-height;
+  padding: $navbar-height 20px 0;
   min-height: 100vh;
 }
 
-.layout {
+.hero {
   display: grid;
   grid-template-columns: 1fr;
 
@@ -15,14 +15,10 @@
   }
 }
 
-.media {
-  @include flex-col;
-  gap: $space-1;
-}
-
 .mainImage {
   position: relative;
   aspect-ratio: 3 / 4;
+  max-height: 75vh;
   overflow: hidden;
   background: $color-background-alt;
 }
@@ -38,10 +34,6 @@
 
   @include lg {
     padding: $space-10 $space-8;
-    position: sticky;
-    top: $navbar-height;
-    height: fit-content;
-    max-height: calc(100vh - #{$navbar-height});
     overflow-y: auto;
   }
 }

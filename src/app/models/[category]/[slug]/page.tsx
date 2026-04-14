@@ -58,50 +58,19 @@ export default async function ModelPage({ params }: ModelPageProps) {
     <>
       <Navbar />
       <main className={styles.main}>
-        <div className={styles.layout}>
-          <div className={styles.media}>
-            {model.images.main && (
-              <div className={styles.mainImage}>
-                <Image
-                  src={model.images.main}
-                  alt={fullName}
-                  fill
-                  sizes="(max-width: 768px) 100vw, 55vw"
-                  className={styles.image}
-                  priority
-                />
-              </div>
-            )}
-
-            {model.images.gallery.length > 0 && (
-              <GallerySlider images={model.images.gallery} alt={fullName} />
-            )}
-
-            {(model.images.pdf || model.instagramUrl) && (
-              <div className={styles.links}>
-                {model.images.pdf && (
-                  <a
-                    href={model.images.pdf}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.link}
-                  >
-                    PDF
-                  </a>
-                )}
-                {model.instagramUrl && (
-                  <a
-                    href={model.instagramUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={styles.link}
-                  >
-                    Instagram
-                  </a>
-                )}
-              </div>
-            )}
-          </div>
+        <div className={styles.hero}>
+          {model.images.main && (
+            <div className={styles.mainImage}>
+              <Image
+                src={model.images.main}
+                alt={fullName}
+                fill
+                sizes="(max-width: 768px) 100vw, 55vw"
+                className={styles.image}
+                priority
+              />
+            </div>
+          )}
 
           <aside className={styles.info}>
             <h1 className={styles.name}>{fullName}</h1>
@@ -119,6 +88,35 @@ export default async function ModelPage({ params }: ModelPageProps) {
             </div>
           </aside>
         </div>
+
+        {model.images.gallery.length > 0 && (
+          <GallerySlider images={model.images.gallery} alt={fullName} />
+        )}
+
+        {(model.images.pdf || model.instagramUrl) && (
+          <div className={styles.links}>
+            {model.images.pdf && (
+              <a
+                href={model.images.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.link}
+              >
+                PDF
+              </a>
+            )}
+            {model.instagramUrl && (
+              <a
+                href={model.instagramUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.link}
+              >
+                Instagram
+              </a>
+            )}
+          </div>
+        )}
       </main>
       <Footer />
     </>
