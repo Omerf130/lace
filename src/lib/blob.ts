@@ -1,6 +1,6 @@
 import { put, del } from "@vercel/blob";
 
-export async function uploadImage(file: File): Promise<string> {
+export async function uploadFile(file: File): Promise<string> {
   const blob = await put(file.name, file, {
     access: "public",
     addRandomSuffix: true,
@@ -8,11 +8,11 @@ export async function uploadImage(file: File): Promise<string> {
   return blob.url;
 }
 
-export async function deleteImage(url: string): Promise<void> {
+export async function deleteFile(url: string): Promise<void> {
   await del(url);
 }
 
-export async function uploadMultipleImages(files: File[]): Promise<string[]> {
-  const results = await Promise.all(files.map(uploadImage));
+export async function uploadMultipleFiles(files: File[]): Promise<string[]> {
+  const results = await Promise.all(files.map(uploadFile));
   return results;
 }

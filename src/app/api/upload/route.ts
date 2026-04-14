@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthFromCookies } from "@/lib/auth";
-import { uploadImage } from "@/lib/blob";
+import { uploadFile } from "@/lib/blob";
 import type { ApiResponse } from "@/types";
 
 export async function POST(request: NextRequest) {
@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
-    const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif"];
+    const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif", "video/mp4"];
 
     for (const file of files) {
       if (!ALLOWED_TYPES.includes(file.type)) {
@@ -41,7 +41,7 @@ export async function POST(request: NextRequest) {
       }
     }
 
-    const urls = await Promise.all(files.map(uploadImage));
+    const urls = await Promise.all(files.map(uploadFile));
 
     return NextResponse.json<ApiResponse<{ urls: string[] }>>(
       { success: true, data: { urls } },

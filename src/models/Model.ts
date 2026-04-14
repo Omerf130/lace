@@ -23,6 +23,7 @@ const ModelSchema = new Schema<IModel>(
     images: {
       main: { type: String, default: "" },
       gallery: { type: [String], default: [] },
+      coverVideo: { type: String, default: "" },
     },
     attributes: {
       height: { type: Number, default: 0 },

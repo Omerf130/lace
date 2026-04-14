@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "@/lib/mongodb";
 import { getAuthFromCookies } from "@/lib/auth";
-import { deleteImage } from "@/lib/blob";
+import { deleteFile } from "@/lib/blob";
 import { TalentModel } from "@/models/Model";
 import type { ApiResponse, IModel } from "@/types";
 
@@ -120,7 +120,7 @@ export async function DELETE(
 
     const category = talentModel.category;
 
-    await Promise.allSettled(imagesToDelete.map(deleteImage));
+    await Promise.allSettled(imagesToDelete.map(deleteFile));
     await TalentModel.findByIdAndDelete(id);
 
     revalidatePath(`/models/${category}`);

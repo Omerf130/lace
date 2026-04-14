@@ -48,6 +48,7 @@ export interface ModelAttributes {
 export interface ModelImages {
   main: string;
   gallery: string[];
+  coverVideo?: string;
 }
 
 export interface IModel {

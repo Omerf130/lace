@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
+import VideoUploader from "@/components/VideoUploader/VideoUploader";
 import GalleryReorder from "@/components/GalleryReorder/GalleryReorder";
 import { capitalizeWords } from "@/lib/utils";
 import type { IModel, ModelCategory, ModelStatus } from "@/types";
@@ -19,6 +20,7 @@ interface FormState {
   bio: string;
   mainImage: string;
   gallery: string[];
+  coverVideo: string;
   height: string;
   bust: string;
   waist: string;
@@ -36,6 +38,7 @@ function getInitial(data?: IModel): FormState {
     bio: data?.bio ?? "",
     mainImage: data?.images.main ?? "",
     gallery: data?.images.gallery ?? [],
+    coverVideo: data?.images.coverVideo ?? "",
     height: data?.attributes.height ? String(data.attributes.height) : "",
     bust: data?.attributes.bust ? String(data.attributes.bust) : "",
     waist: data?.attributes.waist ? String(data.attributes.waist) : "",
@@ -77,6 +80,7 @@ export default function ModelForm({ initialData }: ModelFormProps) {
       images: {
         main: form.mainImage,
         gallery: form.gallery,
+        coverVideo: form.coverVideo,
       },
       attributes: {
         height: Number(form.height) || 0,
@@ -199,6 +203,12 @@ export default function ModelForm({ initialData }: ModelFormProps) {
             />
           </div>
         )}
+
+        <VideoUploader
+          label="Cover Video (optional, max 8MB)"
+          value={form.coverVideo}
+          onChange={(url) => update("coverVideo", url)}
+        />
       </div>
 
       <div className={styles.section}>
