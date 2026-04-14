@@ -83,3 +83,22 @@
   font-size: $font-size-sm;
   color: $color-text;
 }
+
+.pdfLink {
+  display: inline-flex;
+  align-items: center;
+  align-self: flex-start;
+  margin-top: $space-2;
+  padding: $space-2 $space-5;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+  color: $color-text;
+  border: 1px solid $color-border;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-background-alt;
+  }
+}

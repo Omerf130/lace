@@ -49,6 +49,7 @@ export interface ModelImages {
   main: string;
   gallery: string[];
   coverVideo?: string;
+  pdf?: string;
 }
 
 export interface IModel {

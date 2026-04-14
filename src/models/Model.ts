@@ -24,6 +24,7 @@ const ModelSchema = new Schema<IModel>(
       main: { type: String, default: "" },
       gallery: { type: [String], default: [] },
       coverVideo: { type: String, default: "" },
+      pdf: { type: String, default: "" },
     },
     attributes: {
       height: { type: Number, default: 0 },

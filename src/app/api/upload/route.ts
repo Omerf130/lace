@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     }
 
     const MAX_SIZE = 10 * 1024 * 1024; // 10 MB
-    const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif", "video/mp4"];
+    const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp", "image/avif", "video/mp4", "application/pdf"];
 
     for (const file of files) {
       if (!ALLOWED_TYPES.includes(file.type)) {

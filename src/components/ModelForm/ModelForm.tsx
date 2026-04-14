@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import VideoUploader from "@/components/VideoUploader/VideoUploader";
+import PdfUploader from "@/components/PdfUploader/PdfUploader";
 import GalleryReorder from "@/components/GalleryReorder/GalleryReorder";
 import { capitalizeWords } from "@/lib/utils";
 import type { IModel, ModelCategory, ModelStatus } from "@/types";
@@ -21,6 +22,7 @@ interface FormState {
   mainImage: string;
   gallery: string[];
   coverVideo: string;
+  pdf: string;
   height: string;
   bust: string;
   waist: string;
@@ -39,6 +41,7 @@ function getInitial(data?: IModel): FormState {
     mainImage: data?.images.main ?? "",
     gallery: data?.images.gallery ?? [],
     coverVideo: data?.images.coverVideo ?? "",
+    pdf: data?.images.pdf ?? "",
     height: data?.attributes.height ? String(data.attributes.height) : "",
     bust: data?.attributes.bust ? String(data.attributes.bust) : "",
     waist: data?.attributes.waist ? String(data.attributes.waist) : "",
@@ -81,6 +84,7 @@ export default function ModelForm({ initialData }: ModelFormProps) {
         main: form.mainImage,
         gallery: form.gallery,
         coverVideo: form.coverVideo,
+        pdf: form.pdf,
       },
       attributes: {
         height: Number(form.height) || 0,
@@ -208,6 +212,12 @@ export default function ModelForm({ initialData }: ModelFormProps) {
           label="Cover Video (optional, max 8MB)"
           value={form.coverVideo}
           onChange={(url) => update("coverVideo", url)}
+        />
+
+        <PdfUploader
+          label="PDF (optional, max 10MB)"
+          value={form.pdf}
+          onChange={(url) => update("pdf", url)}
         />
       </div>
 

@@ -13,6 +13,7 @@ export function serializeModel(model: IModel): SerializedModel {
       main: model.images.main,
       gallery: [...model.images.gallery],
       coverVideo: model.images.coverVideo || "",
+      pdf: model.images.pdf || "",
     },
     attributes: { ...model.attributes },
     createdAt: model.createdAt.toISOString(),
