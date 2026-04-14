@@ -10,34 +10,56 @@
 
 .content {
   max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.title {
-  font-size: $font-size-xs;
-  font-weight: $font-weight-medium;
-  letter-spacing: $letter-spacing-widest;
-  text-transform: uppercase;
-  color: $color-text-muted;
-  margin-bottom: $space-10;
-}
-
-.text {
+.intro {
   font-size: $font-size-lg;
   font-weight: $font-weight-light;
   line-height: $line-height-relaxed;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
   color: $color-text;
-  margin-bottom: $space-6;
+  margin-bottom: $space-16;
 }
 
-.contact {
-  margin-top: $space-16;
+.section {
+  margin-bottom: $space-10;
 }
 
-.subtitle {
+.heading {
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
   letter-spacing: $letter-spacing-widest;
   text-transform: uppercase;
   color: $color-text-muted;
   margin-bottom: $space-4;
+}
+
+.name {
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text;
+  margin-bottom: $space-2;
+}
+
+.detail {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-normal;
+  letter-spacing: $letter-spacing-wide;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+
+  a {
+    color: $color-text;
+    text-decoration: none;
+    transition: opacity $transition-fast;
+
+    &:hover {
+      opacity: 0.6;
+    }
+  }
 }
