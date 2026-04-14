@@ -32,6 +32,7 @@ export default function Navbar() {
         </svg>
       </Link>
 
+    <div className={styles.linksWrapper}>
       <div className={styles.links}>
         <Link
           href="/models/women"
@@ -49,8 +50,9 @@ export default function Navbar() {
           href="/about"
           className={`${styles.link} ${isActive("/about") ? styles.active : ""}`}
         >
-          About
-        </Link>
+            About
+          </Link>
+        </div>
       </div>
     </nav>
   );

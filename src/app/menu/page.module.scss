@@ -39,6 +39,7 @@
 
 .navLink {
   display: block;
+  font-family: var(--font-bebas-neue), sans-serif;
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: $font-weight-bold;
   letter-spacing: $letter-spacing-wide;
