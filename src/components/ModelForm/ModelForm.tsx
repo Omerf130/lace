@@ -19,6 +19,7 @@ interface FormState {
   lastName: string;
   category: ModelCategory;
   bio: string;
+  instagramUrl: string;
   mainImage: string;
   gallery: string[];
   coverVideo: string;
@@ -38,6 +39,7 @@ function getInitial(data?: IModel): FormState {
     lastName: data?.lastName ?? "",
     category: data?.category ?? "women",
     bio: data?.bio ?? "",
+    instagramUrl: data?.instagramUrl ?? "",
     mainImage: data?.images.main ?? "",
     gallery: data?.images.gallery ?? [],
     coverVideo: data?.images.coverVideo ?? "",
@@ -80,6 +82,7 @@ export default function ModelForm({ initialData }: ModelFormProps) {
       category: form.category,
       status,
       bio: form.bio.trim(),
+      instagramUrl: form.instagramUrl.trim(),
       images: {
         main: form.mainImage,
         gallery: form.gallery,
@@ -178,6 +181,17 @@ export default function ModelForm({ initialData }: ModelFormProps) {
             onChange={(e) => update("bio", e.target.value)}
             className={styles.textarea}
             rows={4}
+          />
+        </label>
+
+        <label className={styles.field}>
+          <span className={styles.label}>Instagram URL</span>
+          <input
+            type="url"
+            value={form.instagramUrl}
+            onChange={(e) => update("instagramUrl", e.target.value)}
+            className={styles.input}
+            placeholder="https://instagram.com/..."
           />
         </label>
       </div>

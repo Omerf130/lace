@@ -77,15 +77,29 @@ export default async function ModelPage({ params }: ModelPageProps) {
               <GallerySlider images={model.images.gallery} alt={fullName} />
             )}
 
-            {model.images.pdf && (
-              <a
-                href={model.images.pdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.pdfLink}
-              >
-                PDF
-              </a>
+            {(model.images.pdf || model.instagramUrl) && (
+              <div className={styles.links}>
+                {model.images.pdf && (
+                  <a
+                    href={model.images.pdf}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    PDF
+                  </a>
+                )}
+                {model.instagramUrl && (
+                  <a
+                    href={model.instagramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    Instagram
+                  </a>
+                )}
+              </div>
             )}
           </div>
 

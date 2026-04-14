@@ -60,6 +60,7 @@ export interface IModel {
   category: ModelCategory;
   status: ModelStatus;
   bio: string;
+  instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;
   createdAt: Date;
@@ -78,6 +79,7 @@ export interface SerializedModel {
   category: ModelCategory;
   status: ModelStatus;
   bio: string;
+  instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;
   createdAt: string;

@@ -20,6 +20,7 @@ const ModelSchema = new Schema<IModel>(
       index: true,
     },
     bio: { type: String, default: "" },
+    instagramUrl: { type: String, default: "" },
     images: {
       main: { type: String, default: "" },
       gallery: { type: [String], default: [] },

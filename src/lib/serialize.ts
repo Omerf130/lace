@@ -9,6 +9,7 @@ export function serializeModel(model: IModel): SerializedModel {
     category: model.category,
     status: model.status,
     bio: model.bio,
+    instagramUrl: model.instagramUrl || "",
     images: {
       main: model.images.main,
       gallery: [...model.images.gallery],
