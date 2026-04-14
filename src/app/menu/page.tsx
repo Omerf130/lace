@@ -1,27 +1,30 @@
 import Link from "next/link";
-import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import styles from "./page.module.scss";
 
 export const metadata = {
   title: "Menu",
 };
 
+const NAV_ITEMS = [
+  { label: "Women", href: "/models/women" },
+  { label: "Men", href: "/models/men" },
+  { label: "About", href: "/about" },
+];
+
 export default function MenuPage() {
   return (
-    <>
-      <Navbar />
-      <main className={styles.main}>
-        <div className={styles.grid}>
-          <Link href="/models/women" className={styles.category}>
-            <span className={styles.label}>Women</span>
+    <main className={styles.page}>
+      <Link href="/" className={styles.logo}>
+        LACE
+      </Link>
+
+      <nav className={styles.nav}>
+        {NAV_ITEMS.map((item) => (
+          <Link key={item.href} href={item.href} className={styles.navLink}>
+            {item.label}
           </Link>
-          <Link href="/models/men" className={styles.category}>
-            <span className={styles.label}>Men</span>
-          </Link>
-        </div>
-      </main>
-      <Footer />
-    </>
+        ))}
+      </nav>
+    </main>
   );
 }
