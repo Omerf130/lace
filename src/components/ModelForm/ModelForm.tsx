@@ -4,7 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import ImageUploader from "@/components/ImageUploader/ImageUploader";
 import GalleryReorder from "@/components/GalleryReorder/GalleryReorder";
-import type { IModel, ModelCategory } from "@/types";
+import { capitalizeWords } from "@/lib/utils";
+import type { IModel, ModelCategory, ModelStatus } from "@/types";
 import styles from "./ModelForm.module.scss";
 
 interface ModelFormProps {
@@ -57,8 +58,7 @@ export default function ModelForm({ initialData }: ModelFormProps) {
     setForm((prev) => ({ ...prev, [key]: value }));
   }
 
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
+  async function save(status: ModelStatus) {
     setError("");
 
     if (!form.firstName.trim() || !form.lastName.trim()) {
@@ -69,9 +69,10 @@ export default function ModelForm({ initialData }: ModelFormProps) {
     setSaving(true);
 
     const payload = {
-      firstName: form.firstName.trim(),
-      lastName: form.lastName.trim(),
+      firstName: capitalizeWords(form.firstName.trim()),
+      lastName: capitalizeWords(form.lastName.trim()),
       category: form.category,
+      status,
       bio: form.bio.trim(),
       images: {
         main: form.mainImage,
@@ -113,6 +114,11 @@ export default function ModelForm({ initialData }: ModelFormProps) {
     } finally {
       setSaving(false);
     }
+  }
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    save(initialData?.status ?? "draft");
   }
 
   return (
@@ -273,8 +279,21 @@ export default function ModelForm({ initialData }: ModelFormProps) {
         >
           Cancel
         </button>
-        <button type="submit" className={styles.saveBtn} disabled={saving}>
-          {saving ? "Saving..." : isEdit ? "Update Model" : "Create Model"}
+        <button
+          type="button"
+          onClick={() => save("draft")}
+          className={styles.draftBtn}
+          disabled={saving}
+        >
+          {saving ? "Saving..." : "Save as Draft"}
+        </button>
+        <button
+          type="button"
+          onClick={() => save("published")}
+          className={styles.saveBtn}
+          disabled={saving}
+        >
+          {saving ? "Saving..." : "Publish"}
         </button>
       </div>
     </form>

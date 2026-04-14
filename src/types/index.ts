@@ -33,6 +33,7 @@ export interface JwtPayload {
 // ─── Model (talent) ──────────────────────────────────────────────────────────
 
 export type ModelCategory = "men" | "women";
+export type ModelStatus = "draft" | "published";
 
 export interface ModelAttributes {
   height: number;
@@ -55,6 +56,7 @@ export interface IModel {
   lastName: string;
   slug: string;
   category: ModelCategory;
+  status: ModelStatus;
   bio: string;
   images: ModelImages;
   attributes: ModelAttributes;
@@ -72,6 +74,7 @@ export interface SerializedModel {
   lastName: string;
   slug: string;
   category: ModelCategory;
+  status: ModelStatus;
   bio: string;
   images: ModelImages;
   attributes: ModelAttributes;

@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: ModelPageProps) {
   }
 
   await connectToDatabase();
-  const model = await TalentModel.findOne({ slug, category }).lean<IModel>();
+  const model = await TalentModel.findOne({ slug, category, status: "published" }).lean<IModel>();
 
   if (!model) return { title: "Not Found" };
 
@@ -47,7 +47,7 @@ export default async function ModelPage({ params }: ModelPageProps) {
   }
 
   await connectToDatabase();
-  const model = await TalentModel.findOne({ slug, category }).lean<IModel>();
+  const model = await TalentModel.findOne({ slug, category, status: "published" }).lean<IModel>();
 
   if (!model) notFound();
 

@@ -7,6 +7,7 @@ export function serializeModel(model: IModel): SerializedModel {
     lastName: model.lastName,
     slug: model.slug,
     category: model.category,
+    status: model.status,
     bio: model.bio,
     images: {
       main: model.images.main,

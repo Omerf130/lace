@@ -20,6 +20,7 @@ export async function GET(request: NextRequest) {
     const regex = new RegExp(escaped, "i");
 
     const results = await TalentModel.find({
+      status: "published",
       $or: [
         { firstName: regex },
         { lastName: regex },

@@ -30,7 +30,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
   await connectToDatabase();
 
-  const models = await TalentModel.find({ category })
+  const models = await TalentModel.find({ category, status: "published" })
     .sort({ _id: 1 })
     .limit(PAGE_SIZE + 1)
     .lean<IModel[]>();

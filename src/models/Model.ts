@@ -13,6 +13,12 @@ const ModelSchema = new Schema<IModel>(
       required: true,
       index: true,
     },
+    status: {
+      type: String,
+      enum: ["draft", "published"],
+      default: "draft",
+      index: true,
+    },
     bio: { type: String, default: "" },
     images: {
       main: { type: String, default: "" },

@@ -19,13 +19,34 @@ export default function DashboardPage() {
 
   async function fetchModels() {
     try {
-      const res = await fetch("/api/models?limit=200");
+      const res = await fetch("/api/models?limit=200&status=all");
       const data = await res.json();
       if (data.success) {
         setModels(data.data.items);
       }
     } finally {
       setLoading(false);
+    }
+  }
+
+  async function handleToggleStatus(id: string, currentStatus: string) {
+    const newStatus = currentStatus === "published" ? "draft" : "published";
+    try {
+      const res = await fetch(`/api/models/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: newStatus }),
+      });
+      const data = await res.json();
+      if (data.success) {
+        setModels((prev) =>
+          prev.map((m) =>
+            m._id.toString() === id ? { ...m, status: newStatus as IModel["status"] } : m
+          )
+        );
+      }
+    } catch {
+      /* silently fail */
     }
   }
 
@@ -70,6 +91,7 @@ export default function DashboardPage() {
             <span className={styles.colImage} />
             <span className={styles.colName}>Name</span>
             <span className={styles.colCategory}>Category</span>
+            <span className={styles.colStatus}>Status</span>
             <span className={styles.colActions}>Actions</span>
           </div>
 
@@ -94,7 +116,24 @@ export default function DashboardPage() {
                 </div>
                 <span className={styles.colName}>{fullName}</span>
                 <span className={styles.colCategory}>{model.category}</span>
+                <span className={styles.colStatus}>
+                  <span
+                    className={
+                      model.status === "published"
+                        ? styles.badgePublished
+                        : styles.badgeDraft
+                    }
+                  >
+                    {model.status ?? "draft"}
+                  </span>
+                </span>
                 <div className={styles.colActions}>
+                  <button
+                    onClick={() => handleToggleStatus(id, model.status ?? "draft")}
+                    className={styles.statusBtn}
+                  >
+                    {model.status === "published" ? "Unpublish" : "Publish"}
+                  </button>
                   <button
                     onClick={() => router.push(`/admin/dashboard/${id}`)}
                     className={styles.editBtn}

@@ -22,6 +22,20 @@ export async function GET(request: NextRequest) {
 
     const filter: Record<string, unknown> = {};
 
+    // Admin can request all models (including drafts) via ?status=all
+    const statusParam = searchParams.get("status");
+    if (statusParam === "all") {
+      const auth = await getAuthFromCookies();
+      if (!auth) {
+        return NextResponse.json<ApiResponse>(
+          { success: false, error: "Not authenticated" },
+          { status: 401 }
+        );
+      }
+    } else {
+      filter.status = "published";
+    }
+
     if (category && VALID_CATEGORIES.includes(category)) {
       filter.category = category;
     }

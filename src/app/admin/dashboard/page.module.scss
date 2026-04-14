@@ -59,7 +59,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 64px 1fr 120px 140px;
+  grid-template-columns: 64px 1fr 100px 100px 200px;
   padding: $space-3 $space-4;
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
@@ -72,7 +72,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 64px 1fr 120px 140px;
+  grid-template-columns: 64px 1fr 100px 100px 200px;
   align-items: center;
   padding: $space-3 $space-4;
   border-bottom: 1px solid $color-border;
@@ -152,5 +152,49 @@
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+}
+
+.colStatus {
+  display: flex;
+  align-items: center;
+}
+
+.badgePublished,
+.badgeDraft {
+  display: inline-block;
+  padding: 2px $space-2;
+  font-size: 11px;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  border-radius: $border-radius-sm;
+}
+
+.badgePublished {
+  color: #15803d;
+  background: #dcfce7;
+}
+
+.badgeDraft {
+  color: #92400e;
+  background: #fef3c7;
+}
+
+.statusBtn {
+  padding: $space-1 $space-3;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+  background: $color-background;
+  color: $color-text;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-background-alt;
   }
 }
