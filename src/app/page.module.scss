@@ -18,6 +18,11 @@
   opacity: 0.6;
 }
 
+.coverImage {
+  object-fit: cover;
+  opacity: 0.6;
+}
+
 .overlay {
   position: absolute;
   inset: 0;

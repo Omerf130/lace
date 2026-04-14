@@ -1,0 +1,142 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-tight;
+  margin-bottom: $space-8;
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-8;
+
+  @include lg {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.section {
+  padding: $space-6;
+  background: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+}
+
+.sectionHeader {
+  @include flex-between;
+  margin-bottom: $space-4;
+}
+
+.sectionTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+}
+
+.radio {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-xs;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  input {
+    accent-color: $color-text;
+  }
+}
+
+.preview {
+  position: relative;
+  margin-bottom: $space-4;
+}
+
+.previewMedia {
+  width: 100%;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: $border-radius-sm;
+  background: $color-background-alt;
+}
+
+.removeBtn {
+  position: absolute;
+  top: $space-2;
+  right: $space-2;
+  padding: $space-1 $space-3;
+  font-size: $font-size-xs;
+  color: $color-text-light;
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+
+.uploadBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-2 $space-5;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text;
+  background: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-background-alt;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  margin-top: $space-4;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.saveBtn {
+  margin-top: $space-6;
+  padding: $space-3 $space-8;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  color: $color-text-light;
+  background: $color-dark;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.85;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

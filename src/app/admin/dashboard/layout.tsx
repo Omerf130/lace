@@ -39,6 +39,12 @@ export default function DashboardLayout({
           >
             + New Model
           </Link>
+          <Link
+            href="/admin/dashboard/settings"
+            className={`${styles.navLink} ${isActive("/admin/dashboard/settings") ? styles.active : ""}`}
+          >
+            Settings
+          </Link>
         </nav>
 
         <button onClick={handleLogout} className={styles.logout}>
