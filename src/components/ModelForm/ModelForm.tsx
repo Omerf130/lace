@@ -18,6 +18,7 @@ interface FormState {
   firstName: string;
   lastName: string;
   category: ModelCategory;
+  isAiModel: boolean;
   instagramUrl: string;
   mainImage: string;
   gallery: string[];
@@ -37,6 +38,7 @@ function getInitial(data?: IModel): FormState {
     firstName: data?.firstName ?? "",
     lastName: data?.lastName ?? "",
     category: data?.category ?? "women",
+    isAiModel: data?.isAiModel === true,
     instagramUrl: data?.instagramUrl ?? "",
     mainImage: data?.images.main ?? "",
     gallery: data?.images.gallery ?? [],
@@ -78,6 +80,7 @@ export default function ModelForm({ initialData }: ModelFormProps) {
       firstName: capitalizeWords(form.firstName.trim()),
       lastName: capitalizeWords(form.lastName.trim()),
       category: form.category,
+      isAiModel: form.isAiModel,
       status,
       instagramUrl: form.instagramUrl.trim(),
       images: {
@@ -181,6 +184,23 @@ export default function ModelForm({ initialData }: ModelFormProps) {
             placeholder="https://instagram.com/..."
           />
         </label>
+
+        <div className={styles.switchRow}>
+          <span className={styles.label} id="ai-model-label">
+            AI model
+          </span>
+          <label className={styles.switch}>
+            <input
+              type="checkbox"
+              role="switch"
+              aria-checked={form.isAiModel}
+              aria-labelledby="ai-model-label"
+              checked={form.isAiModel}
+              onChange={(e) => update("isAiModel", e.target.checked)}
+            />
+            <span className={styles.switchSlider} aria-hidden />
+          </label>
+        </div>
       </div>
 
       <div className={styles.section}>

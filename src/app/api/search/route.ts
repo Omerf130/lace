@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
+import { serializeModels } from "@/lib/serialize";
 import { TalentModel } from "@/models/Model";
-import type { ApiResponse, IModel } from "@/types";
+import type { ApiResponse, IModel, SerializedModel } from "@/types";
 
 export async function GET(request: NextRequest) {
   try {
     const q = request.nextUrl.searchParams.get("q")?.trim();
 
     if (!q) {
-      return NextResponse.json<ApiResponse<IModel[]>>({
+      return NextResponse.json<ApiResponse<SerializedModel[]>>({
         success: true,
         data: [],
       });
@@ -31,9 +32,9 @@ export async function GET(request: NextRequest) {
       .limit(50)
       .lean<IModel[]>();
 
-    return NextResponse.json<ApiResponse<IModel[]>>({
+    return NextResponse.json<ApiResponse<SerializedModel[]>>({
       success: true,
-      data: results,
+      data: serializeModels(results),
     });
   } catch (error) {
     return NextResponse.json<ApiResponse>(

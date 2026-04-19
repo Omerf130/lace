@@ -2,8 +2,15 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "@/lib/mongodb";
 import { getAuthFromCookies } from "@/lib/auth";
+import { serializeModels } from "@/lib/serialize";
 import { TalentModel } from "@/models/Model";
-import type { ApiResponse, PaginatedResponse, IModel, ModelCategory } from "@/types";
+import type {
+  ApiResponse,
+  PaginatedResponse,
+  IModel,
+  ModelCategory,
+  SerializedModel,
+} from "@/types";
 
 const DEFAULT_LIMIT = 12;
 const VALID_CATEGORIES: ModelCategory[] = ["men", "women"];
@@ -40,6 +47,13 @@ export async function GET(request: NextRequest) {
       filter.category = category;
     }
 
+    const isAiParam = searchParams.get("isAiModel");
+    if (isAiParam === "true") {
+      filter.isAiModel = true;
+    } else if (isAiParam === "false") {
+      filter.isAiModel = { $ne: true };
+    }
+
     if (cursor) {
       filter._id = { $gt: cursor };
     }
@@ -55,9 +69,9 @@ export async function GET(request: NextRequest) {
       ? items[items.length - 1]._id.toString()
       : null;
 
-    return NextResponse.json<ApiResponse<PaginatedResponse<IModel>>>({
+    return NextResponse.json<ApiResponse<PaginatedResponse<SerializedModel>>>({
       success: true,
-      data: { items, nextCursor },
+      data: { items: serializeModels(items), nextCursor },
     });
   } catch (error) {
     return NextResponse.json<ApiResponse>(

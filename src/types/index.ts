@@ -61,6 +61,8 @@ export interface IModel {
   slug: string;
   category: ModelCategory;
   status: ModelStatus;
+  /** When true, model appears under “AI models” on category pages. Omitted/false = regular list. */
+  isAiModel?: boolean;
   instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;
@@ -79,6 +81,7 @@ export interface SerializedModel {
   slug: string;
   category: ModelCategory;
   status: ModelStatus;
+  isAiModel: boolean;
   instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;

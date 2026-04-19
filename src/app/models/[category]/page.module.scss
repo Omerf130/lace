@@ -16,3 +16,13 @@
   color: $color-text-muted;
   margin-bottom: $space-10;
 }
+
+.subtitle {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-widest;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  margin-top: $space-12;
+  margin-bottom: $space-6;
+}

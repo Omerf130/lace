@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import type { IModel } from "@/types";
+import type { IModel, SerializedModel } from "@/types";
 import styles from "./page.module.scss";
 
 export default function DashboardPage() {
-  const [models, setModels] = useState<IModel[]>([]);
+  const [models, setModels] = useState<SerializedModel[]>([]);
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState<string | null>(null);
   const router = useRouter();
@@ -40,8 +40,8 @@ export default function DashboardPage() {
       const data = await res.json();
       if (data.success) {
         setModels((prev) =>
-          prev.map((m) =>
-            m._id.toString() === id ? { ...m, status: newStatus as IModel["status"] } : m
+            prev.map((m) =>
+            m._id === id ? { ...m, status: newStatus as IModel["status"] } : m
           )
         );
       }
@@ -58,7 +58,7 @@ export default function DashboardPage() {
       const res = await fetch(`/api/models/${id}`, { method: "DELETE" });
       const data = await res.json();
       if (data.success) {
-        setModels((prev) => prev.filter((m) => m._id.toString() !== id));
+        setModels((prev) => prev.filter((m) => m._id !== id));
       }
     } finally {
       setDeleting(null);
@@ -96,7 +96,7 @@ export default function DashboardPage() {
           </div>
 
           {models.map((model) => {
-            const id = model._id.toString();
+            const id = model._id;
             const fullName = `${model.firstName} ${model.lastName}`;
 
             return (
@@ -114,7 +114,12 @@ export default function DashboardPage() {
                     <div className={styles.thumbPlaceholder} />
                   )}
                 </div>
-                <span className={styles.colName}>{fullName}</span>
+                <span className={styles.colName}>
+                  {fullName}
+                  {model.isAiModel && (
+                    <span className={styles.aiBadge}>AI</span>
+                  )}
+                </span>
                 <span className={styles.colCategory}>{model.category}</span>
                 <span className={styles.colStatus}>
                   <span

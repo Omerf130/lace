@@ -9,12 +9,15 @@ interface ModelGridProps {
   initialModels: SerializedModel[];
   initialCursor: string | null;
   category: ModelCategory;
+  /** When true, this grid loads only AI models; when false, only non-AI models. */
+  isAiModel: boolean;
 }
 
 export default function ModelGrid({
   initialModels,
   initialCursor,
   category,
+  isAiModel,
 }: ModelGridProps) {
   const [models, setModels] = useState<SerializedModel[]>(initialModels);
   const [cursor, setCursor] = useState<string | null>(initialCursor);
@@ -26,8 +29,9 @@ export default function ModelGrid({
     setLoading(true);
 
     try {
+      const aiParam = isAiModel ? "true" : "false";
       const res = await fetch(
-        `/api/models?category=${category}&cursor=${cursor}&limit=12`
+        `/api/models?category=${category}&cursor=${cursor}&limit=12&isAiModel=${aiParam}`
       );
       const json = await res.json();
 
@@ -40,7 +44,7 @@ export default function ModelGrid({
     } finally {
       setLoading(false);
     }
-  }, [cursor, category, loading]);
+  }, [cursor, category, isAiModel, loading]);
 
   useEffect(() => {
     const el = observerRef.current;

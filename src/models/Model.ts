@@ -19,6 +19,7 @@ const ModelSchema = new Schema<IModel>(
       default: "draft",
       index: true,
     },
+    isAiModel: { type: Boolean, default: false, index: true },
     instagramUrl: { type: String, default: "" },
     images: {
       main: { type: String, default: "" },

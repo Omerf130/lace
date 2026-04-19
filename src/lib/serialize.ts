@@ -8,6 +8,7 @@ export function serializeModel(model: IModel): SerializedModel {
     slug: model.slug,
     category: model.category,
     status: model.status,
+    isAiModel: model.isAiModel === true,
     instagramUrl: model.instagramUrl || "",
     images: {
       main: model.images.main,
