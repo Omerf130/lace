@@ -2,6 +2,11 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
+import {
+  fileExceedsUploadLimit,
+  uploadFilesViaBlobClient,
+  uploadTooLargeMessage,
+} from "@/lib/uploadClient";
 import styles from "./ImageUploader.module.scss";
 
 interface ImageUploaderProps {
@@ -28,25 +33,23 @@ export default function ImageUploader({
     if (!files?.length) return;
 
     setError("");
+    const list = Array.from(files);
+    if (list.some((f) => fileExceedsUploadLimit(f.size))) {
+      setError(uploadTooLargeMessage());
+      if (inputRef.current) inputRef.current.value = "";
+      return;
+    }
+
     setUploading(true);
 
     try {
-      const formData = new FormData();
-      Array.from(files).forEach((f) => formData.append("files", f));
-
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (!data.success) {
-        setError(data.error || "Upload failed");
+      const result = await uploadFilesViaBlobClient(list);
+      if (!result.ok) {
+        setError(result.error);
         return;
       }
 
-      const newUrls: string[] = data.data.urls;
+      const newUrls = result.urls;
 
       if (multiple) {
         onChange([...urls, ...newUrls]);

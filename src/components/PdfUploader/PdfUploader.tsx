@@ -1,9 +1,12 @@
 "use client";
 
 import { useState, useRef } from "react";
+import {
+  fileExceedsUploadLimit,
+  uploadFilesViaBlobClient,
+  uploadTooLargeMessage,
+} from "@/lib/uploadClient";
 import styles from "./PdfUploader.module.scss";
-
-const MAX_PDF_SIZE = 10 * 1024 * 1024; // 10MB
 
 interface PdfUploaderProps {
   label: string;
@@ -26,8 +29,8 @@ export default function PdfUploader({
 
     setError("");
 
-    if (file.size > MAX_PDF_SIZE) {
-      setError("PDF must be under 10MB.");
+    if (fileExceedsUploadLimit(file.size)) {
+      setError(uploadTooLargeMessage());
       if (inputRef.current) inputRef.current.value = "";
       return;
     }
@@ -35,22 +38,13 @@ export default function PdfUploader({
     setUploading(true);
 
     try {
-      const formData = new FormData();
-      formData.append("files", file);
-
-      const res = await fetch("/api/upload", {
-        method: "POST",
-        body: formData,
-      });
-
-      const data = await res.json();
-
-      if (!data.success) {
-        setError(data.error || "Upload failed");
+      const result = await uploadFilesViaBlobClient([file]);
+      if (!result.ok) {
+        setError(result.error);
         return;
       }
 
-      onChange(data.data.urls[0]);
+      onChange(result.urls[0]);
     } catch {
       setError("Upload failed. Try again.");
     } finally {

@@ -6,6 +6,8 @@ export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   error?: string;
+  /** Machine-readable reason when useful for clients (e.g. FILE_TOO_LARGE) */
+  errorCode?: string;
 }
 
 export interface PaginatedResponse<T> {

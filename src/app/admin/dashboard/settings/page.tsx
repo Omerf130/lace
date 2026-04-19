@@ -2,6 +2,11 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
+import {
+  fileExceedsUploadLimit,
+  uploadFilesViaBlobClient,
+  uploadTooLargeMessage,
+} from "@/lib/uploadClient";
 import styles from "./page.module.scss";
 
 type CoverType = "video" | "image" | "";
@@ -36,20 +41,21 @@ export default function SettingsPage() {
     setUrl: (url: string) => void,
     setUploading: (v: boolean) => void
   ) {
-    setUploading(true);
     setMessage("");
+    if (fileExceedsUploadLimit(file.size)) {
+      setMessage(uploadTooLargeMessage());
+      return;
+    }
+    setUploading(true);
     try {
-      const formData = new FormData();
-      formData.append("files", file);
-      const res = await fetch("/api/upload", { method: "POST", body: formData });
-      const data = await res.json();
-      if (data.success && data.data?.urls?.[0]) {
-        setUrl(data.data.urls[0]);
+      const result = await uploadFilesViaBlobClient([file]);
+      if (result.ok) {
+        setUrl(result.urls[0]);
       } else {
-        setMessage(data.error || "Upload failed");
+        setMessage(result.error);
       }
-    } catch {
-      setMessage("Upload failed");
+    } catch (e) {
+      setMessage(e instanceof Error ? e.message : "Upload failed");
     } finally {
       setUploading(false);
     }
