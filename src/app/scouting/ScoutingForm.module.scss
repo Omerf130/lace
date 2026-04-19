@@ -36,6 +36,11 @@
 
 .field {
   @include flex-col;
+  gap: $space-1;
+}
+
+.fieldInner {
+  @include flex-col;
   gap: $space-2;
 }
 
@@ -62,10 +67,29 @@
   }
 }
 
+.inputInvalid {
+  border-color: $color-error;
+
+  &:focus {
+    border-color: $color-error;
+  }
+}
+
+.fieldError {
+  font-size: $font-size-xs;
+  color: $color-error;
+  margin: 0;
+  line-height: $line-height-normal;
+}
+
 .fieldset {
   border: none;
   padding: 0;
   margin: 0;
+}
+
+.fieldsetInvalid .label {
+  color: rgba($color-error, 0.85);
 }
 
 .radioRow {
@@ -108,8 +132,85 @@
   gap: $space-2;
 }
 
-.file {
+.fileInputHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.dropzone {
+  position: relative;
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  min-height: 140px;
+  padding: $space-4;
+  border: 1px dashed $color-border;
+  border-radius: $border-radius-lg;
+  background: $color-background-alt;
+  transition: border-color $transition-fast, background $transition-fast;
+}
+
+.dropzoneActive {
+  border-color: $color-text;
+  background: rgba($color-text, 0.04);
+}
+
+.dropzoneInvalid {
+  border-color: rgba($color-error, 0.55);
+  border-style: solid;
+  background: rgba($color-error, 0.04);
+}
+
+.dropHint {
   font-size: $font-size-xs;
+  color: $color-text-muted;
+  text-align: center;
+}
+
+.chooseBtn {
+  padding: $space-2 $space-5;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text-light;
+  background: $color-dark;
+  border: none;
+  border-radius: $border-radius-md;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.88;
+  }
+}
+
+.previewThumb {
+  max-width: 100%;
+  max-height: 100px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: $border-radius-sm;
+}
+
+.fileMeta {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  margin: 0;
+}
+
+.fileName {
+  color: $color-text;
+  word-break: break-all;
 }
 
 .consents {
@@ -134,6 +235,10 @@
     flex-shrink: 0;
     accent-color: $color-dark;
   }
+}
+
+.checkInvalid span {
+  color: rgba($color-error, 0.9);
 }
 
 .footerNote {
@@ -171,12 +276,62 @@
   }
 }
 
-.success {
-  padding: $space-3 $space-4;
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  @include flex-center;
+  padding: $space-6;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(4px);
+}
+
+.modal {
+  width: 100%;
+  max-width: 400px;
+  padding: $space-8;
+  background: $color-background;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+  @include flex-col;
+  align-items: center;
+  text-align: center;
+  gap: $space-4;
+}
+
+.modalTitle {
+  margin: 0;
+  font-size: $font-size-lg;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  color: $color-text;
+}
+
+.modalText {
+  margin: 0;
   font-size: $font-size-sm;
-  color: #15803d;
-  background: #dcfce7;
+  line-height: $line-height-relaxed;
+  color: $color-text-muted;
+}
+
+.modalHomeLink {
+  display: inline-block;
+  margin-top: $space-2;
+  padding: $space-3 $space-8;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: $color-text-light;
+  background: $color-dark;
   border-radius: $border-radius-md;
+  transition: opacity $transition-fast;
+
+  &:hover {
+    opacity: 0.88;
+  }
 }
 
 .error {
