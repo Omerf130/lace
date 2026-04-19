@@ -40,6 +40,18 @@ export default function DashboardLayout({
             + New Model
           </Link>
           <Link
+            href="/admin/dashboard/influencers"
+            className={`${styles.navLink} ${isActive("/admin/dashboard/influencers") ? styles.active : ""}`}
+          >
+            Influencers
+          </Link>
+          <Link
+            href="/admin/dashboard/influencers/new"
+            className={`${styles.navLink} ${isActive("/admin/dashboard/influencers/new") ? styles.active : ""}`}
+          >
+            + New Influencer
+          </Link>
+          <Link
             href="/admin/dashboard/settings"
             className={`${styles.navLink} ${isActive("/admin/dashboard/settings") ? styles.active : ""}`}
           >

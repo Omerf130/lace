@@ -47,11 +47,23 @@ export default function Navbar() {
           Men
         </Link>
         <Link
+          href="/influencers"
+          className={`${styles.link} ${isActive("/influencers") ? styles.active : ""}`}
+        >
+          Influencers
+        </Link>
+        <Link
+          href="/scouting"
+          className={`${styles.link} ${isActive("/scouting") ? styles.active : ""}`}
+        >
+          Get Scouted
+        </Link>
+        <Link
           href="/about"
           className={`${styles.link} ${isActive("/about") ? styles.active : ""}`}
         >
-            About
-          </Link>
+          About
+        </Link>
         </div>
       </div>
     </nav>

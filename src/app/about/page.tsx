@@ -41,12 +41,12 @@ export default function AboutPage() {
           </section>
 
           <section className={styles.section}>
-            <h3 className={styles.name}>Michal Kadush — Model Agent</h3>
+            <h3 className={styles.name}>Ofir — Model Agent</h3>
             <p className={styles.detail}>
-              <a href="mailto:michal@lacemodel.com">michal@lacemodel.com</a>
+              <a href="mailto:michal@lacemodel.com">ofir@lacemodel.com</a>
             </p>
-            <p className={styles.detail}>B: +972 52-471-5515</p>
-            <p className={styles.detail}>M: +972 58-668-6187</p>
+            <p className={styles.detail}>B: +972 50-300-8049</p>
+            {/* <p className={styles.detail}>M: +972 58-668-6187</p> */}
           </section>
 
           <section className={styles.section}>

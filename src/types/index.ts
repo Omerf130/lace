@@ -83,3 +83,35 @@ export interface SerializedModel {
   createdAt: string;
   updatedAt: string;
 }
+
+// ─── Influencer ───────────────────────────────────────────────────────────────
+
+export interface IInfluencer {
+  _id: Types.ObjectId;
+  firstName: string;
+  lastName: string;
+  slug: string;
+  status: ModelStatus;
+  image: string;
+  tiktokUrl?: string;
+  tiktokFollowers?: number;
+  instagramUrl?: string;
+  instagramFollowers?: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface SerializedInfluencer {
+  _id: string;
+  firstName: string;
+  lastName: string;
+  slug: string;
+  status: ModelStatus;
+  image: string;
+  tiktokUrl?: string;
+  tiktokFollowers?: number;
+  instagramUrl?: string;
+  instagramFollowers?: number;
+  createdAt: string;
+  updatedAt: string;
+}
