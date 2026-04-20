@@ -1,21 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
+import localFont from "next/font/local";
+import { Geist_Mono } from "next/font/google";
 import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 import "./globals.scss";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const vogue = localFont({
+  src: "./fonts/Vogue.ttf",
+  variable: "--font-vogue",
+  display: "swap",
+  weight: "400",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const bebasNeue = Bebas_Neue({
-  variable: "--font-bebas-neue",
-  weight: "400",
   subsets: ["latin"],
 });
 
@@ -40,8 +37,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable}`}>
-      <body>
+    <html lang="en" className={`${vogue.variable} ${geistMono.variable}`}>
+      <body className={vogue.className}>
         {children}
         <ConditionalFooter />
       </body>
