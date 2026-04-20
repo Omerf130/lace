@@ -15,6 +15,7 @@
   position: absolute;
   top: $space-8;
   left: $space-8;
+  font-family: var(--font-roman-sd), sans-serif;
   font-size: $font-size-2xl;
   font-weight: $font-weight-bold;
   letter-spacing: $letter-spacing-widest;
@@ -39,12 +40,13 @@
 
 .navLink {
   display: block;
-  font-family: var(--font-vogue), sans-serif;
+  font-family: var(--font-roman-sd), sans-serif;
   font-size: clamp(3rem, 8vw, 7rem);
   font-weight: $font-weight-bold;
   letter-spacing: $letter-spacing-wide;
   text-transform: uppercase;
   line-height: 1.1;
+  white-space: nowrap;
   text-decoration: none;
   color: $color-text-light;
   transition: transform $transition-base, opacity $transition-base;

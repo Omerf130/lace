@@ -11,6 +11,13 @@ const vogue = localFont({
   weight: "400",
 });
 
+const romanSd = localFont({
+  src: "./fonts/Roman SD.ttf",
+  variable: "--font-roman-sd",
+  display: "swap",
+  weight: "400",
+});
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -37,7 +44,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${vogue.variable} ${geistMono.variable}`}>
+    <html
+      lang="en"
+      className={`${vogue.variable} ${romanSd.variable} ${geistMono.variable}`}
+    >
       <body className={vogue.className}>
         {children}
         <ConditionalFooter />
