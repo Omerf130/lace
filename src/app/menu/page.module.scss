@@ -16,7 +16,7 @@
   top: $space-8;
   left: $space-8;
   font-family: var(--font-roman-sd), sans-serif;
-  font-size: $font-size-2xl;
+  font-size: $font-size-xl;
   font-weight: $font-weight-bold;
   letter-spacing: $letter-spacing-widest;
   color: $color-text-light;
@@ -41,7 +41,7 @@
 .navLink {
   display: block;
   font-family: var(--font-roman-sd), sans-serif;
-  font-size: clamp(3rem, 8vw, 7rem);
+  font-size: clamp(1.75rem, 5vw, 4rem);
   font-weight: $font-weight-bold;
   letter-spacing: $letter-spacing-wide;
   text-transform: uppercase;
