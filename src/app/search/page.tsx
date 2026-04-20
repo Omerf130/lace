@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import SearchInput from "@/components/SearchInput/SearchInput";
 import styles from "./page.module.scss";
 
@@ -14,7 +13,6 @@ export default function SearchPage() {
       <main className={styles.main}>
         <SearchInput />
       </main>
-      <Footer />
     </>
   );
 }

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Bebas_Neue } from "next/font/google";
+import ConditionalFooter from "@/components/ConditionalFooter/ConditionalFooter";
 import "./globals.scss";
 
 const geistSans = Geist({
@@ -40,7 +41,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable}`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ConditionalFooter />
+      </body>
     </html>
   );
 }

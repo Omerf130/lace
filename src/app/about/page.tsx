@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import styles from "./page.module.scss";
 
 export const metadata = {
@@ -65,7 +64,6 @@ export default function AboutPage() {
           </section>
         </div>
       </main>
-      <Footer />
     </>
   );
 }

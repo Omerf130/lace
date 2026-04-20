@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { connectToDatabase } from "@/lib/mongodb";
 import { TalentModel } from "@/models/Model";
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import GallerySlider from "@/components/GallerySlider/GallerySlider";
 import type { IModel, ModelCategory } from "@/types";
 import styles from "./page.module.scss";
@@ -117,7 +116,6 @@ export default async function ModelPage({ params }: ModelPageProps) {
             </section>
           )}
       </main>
-      <Footer />
     </>
   );
 }

@@ -2,24 +2,76 @@
 @use "../../styles/mixins" as *;
 
 .footer {
-  @include flex-between;
-  padding: $space-6 $space-6;
-  border-top: 1px solid $color-border;
   margin-top: auto;
+  background: #000;
+  color: rgba(255, 255, 255, 0.88);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.inner {
+  @include flex-col;
+  gap: $space-6;
+  padding: $space-8 $space-6 $space-5;
 
   @include md {
-    padding: $space-8 $space-10;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: $space-10 $space-10 $space-6;
+    gap: $space-6;
   }
 }
 
 .brand {
-  font-size: $font-size-xs;
+  font-size: $font-size-lg;
   font-weight: $font-weight-bold;
   letter-spacing: $letter-spacing-widest;
   text-transform: uppercase;
+  color: $color-text-light;
+  text-decoration: none;
+  flex-shrink: 0;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-4 $space-6;
+}
+
+.link {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  transition: color $transition-fast, opacity $transition-fast;
+
+  &:hover {
+    color: $color-text-light;
+  }
+}
+
+.active {
+  color: $color-text-light;
+  opacity: 0.95;
 }
 
 .copy {
+  margin: 0;
+  padding: 0 $space-6 $space-8;
   font-size: $font-size-xs;
-  color: $color-text-muted;
+  color: rgba(255, 255, 255, 0.45);
+  letter-spacing: $letter-spacing-wide;
+
+  @include md {
+    padding: 0 $space-10 $space-8;
+    max-width: none;
+  }
 }

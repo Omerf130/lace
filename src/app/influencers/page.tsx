@@ -2,7 +2,6 @@ import Image from "next/image";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Influencer } from "@/models/Influencer";
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import type { IInfluencer } from "@/types";
 import styles from "./page.module.scss";
 
@@ -79,7 +78,6 @@ export default async function InfluencersPage() {
           </div>
         )}
       </main>
-      <Footer />
     </>
   );
 }

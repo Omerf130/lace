@@ -3,7 +3,6 @@ import { connectToDatabase } from "@/lib/mongodb";
 import { serializeModels } from "@/lib/serialize";
 import { TalentModel } from "@/models/Model";
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import ModelGrid from "@/components/ModelGrid/ModelGrid";
 import type { IModel, ModelCategory } from "@/types";
 import styles from "./page.module.scss";
@@ -86,7 +85,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           </>
         )}
       </main>
-      <Footer />
     </>
   );
 }

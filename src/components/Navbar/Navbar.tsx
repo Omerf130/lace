@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { NAV_ITEMS } from "@/lib/navLinks";
 import styles from "./Navbar.module.scss";
 
 export default function Navbar() {
@@ -32,38 +33,17 @@ export default function Navbar() {
         </svg>
       </Link>
 
-    <div className={styles.linksWrapper}>
-      <div className={styles.links}>
-        <Link
-          href="/models/women"
-          className={`${styles.link} ${isActive("/models/women") ? styles.active : ""}`}
-        >
-          Women
-        </Link>
-        <Link
-          href="/models/men"
-          className={`${styles.link} ${isActive("/models/men") ? styles.active : ""}`}
-        >
-          Men
-        </Link>
-        <Link
-          href="/influencers"
-          className={`${styles.link} ${isActive("/influencers") ? styles.active : ""}`}
-        >
-          Influencers
-        </Link>
-        <Link
-          href="/scouting"
-          className={`${styles.link} ${isActive("/scouting") ? styles.active : ""}`}
-        >
-          Get Scouted
-        </Link>
-        <Link
-          href="/about"
-          className={`${styles.link} ${isActive("/about") ? styles.active : ""}`}
-        >
-          About
-        </Link>
+      <div className={styles.linksWrapper}>
+        <div className={styles.links}>
+          {NAV_ITEMS.map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${styles.link} ${isActive(item.href) ? styles.active : ""}`}
+            >
+              {item.label}
+            </Link>
+          ))}
         </div>
       </div>
     </nav>

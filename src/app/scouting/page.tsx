@@ -1,5 +1,4 @@
 import Navbar from "@/components/Navbar/Navbar";
-import Footer from "@/components/Footer/Footer";
 import ScoutingForm from "./ScoutingForm";
 import styles from "./page.module.scss";
 
@@ -17,7 +16,6 @@ export default function ScoutingPage() {
           <ScoutingForm />
         </div>
       </main>
-      <Footer />
     </>
   );
 }
