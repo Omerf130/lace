@@ -105,6 +105,17 @@ export default async function ModelPage({ params }: ModelPageProps) {
             <GallerySlider images={allImages} alt={fullName} />
           ) : null;
         })()}
+
+        {model.images.horizontalGallery &&
+          model.images.horizontalGallery.length > 0 && (
+            <section className={styles.horizontalSection} aria-label="Landscape images">
+              <GallerySlider
+                images={model.images.horizontalGallery}
+                alt={`${fullName} — landscape`}
+                layout="horizontal"
+              />
+            </section>
+          )}
       </main>
       <Footer />
     </>

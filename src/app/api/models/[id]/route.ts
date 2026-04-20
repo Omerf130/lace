@@ -117,6 +117,9 @@ export async function DELETE(
     if (talentModel.images.gallery?.length) {
       imagesToDelete.push(...talentModel.images.gallery);
     }
+    if (talentModel.images.horizontalGallery?.length) {
+      imagesToDelete.push(...talentModel.images.horizontalGallery);
+    }
 
     const category = talentModel.category;
 

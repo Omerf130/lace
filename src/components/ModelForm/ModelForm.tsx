@@ -22,6 +22,7 @@ interface FormState {
   instagramUrl: string;
   mainImage: string;
   gallery: string[];
+  horizontalGallery: string[];
   coverVideo: string;
   pdf: string;
   height: string;
@@ -42,6 +43,7 @@ function getInitial(data?: IModel): FormState {
     instagramUrl: data?.instagramUrl ?? "",
     mainImage: data?.images.main ?? "",
     gallery: data?.images.gallery ?? [],
+    horizontalGallery: data?.images.horizontalGallery ?? [],
     coverVideo: data?.images.coverVideo ?? "",
     pdf: data?.images.pdf ?? "",
     height: data?.attributes.height ? String(data.attributes.height) : "",
@@ -86,6 +88,7 @@ export default function ModelForm({ initialData }: ModelFormProps) {
       images: {
         main: form.mainImage,
         gallery: form.gallery,
+        horizontalGallery: form.horizontalGallery,
         coverVideo: form.coverVideo,
         pdf: form.pdf,
       },
@@ -225,6 +228,25 @@ export default function ModelForm({ initialData }: ModelFormProps) {
             <GalleryReorder
               images={form.gallery}
               onChange={(imgs) => update("gallery", imgs)}
+            />
+          </div>
+        )}
+
+        <ImageUploader
+          label="Horizontal images (landscape)"
+          value={form.horizontalGallery}
+          multiple
+          onChange={(urls) => update("horizontalGallery", urls as string[])}
+        />
+
+        {form.horizontalGallery.length > 1 && (
+          <div className={styles.reorderSection}>
+            <span className={styles.label}>
+              Reorder horizontal images (drag to sort)
+            </span>
+            <GalleryReorder
+              images={form.horizontalGallery}
+              onChange={(imgs) => update("horizontalGallery", imgs)}
             />
           </div>
         )}

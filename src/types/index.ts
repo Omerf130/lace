@@ -50,6 +50,8 @@ export interface ModelAttributes {
 export interface ModelImages {
   main: string;
   gallery: string[];
+  /** Landscape-oriented shots; shown in a separate block on the model profile. */
+  horizontalGallery?: string[];
   coverVideo?: string;
   pdf?: string;
 }

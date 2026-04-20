@@ -13,6 +13,7 @@ export function serializeModel(model: IModel): SerializedModel {
     images: {
       main: model.images.main,
       gallery: [...model.images.gallery],
+      horizontalGallery: [...(model.images.horizontalGallery ?? [])],
       coverVideo: model.images.coverVideo || "",
       pdf: model.images.pdf || "",
     },

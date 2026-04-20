@@ -23,6 +23,57 @@
   background: $color-background-alt;
 }
 
+.galleryHorizontal {
+  width: 100%;
+  box-sizing: border-box;
+  padding-inline: $space-4;
+
+  @include md {
+    padding-inline: $space-6;
+  }
+}
+
+.rowHorizontal {
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: min(920px, 100%);
+  margin-inline: auto;
+  gap: $space-3;
+
+  @include sm {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: $space-4;
+  }
+
+  .itemHorizontal:only-child {
+    max-width: min(760px, 100%);
+    margin-inline: auto;
+  }
+
+  .itemHorizontal:not(:only-child) {
+    @include sm {
+      width: calc(50% - #{$space-4} / 2);
+      max-width: calc(50% - #{$space-4} / 2);
+      flex: 0 1 auto;
+    }
+
+    @include lg {
+      width: min(420px, calc(50% - #{$space-4} / 2));
+      max-width: min(420px, calc(50% - #{$space-4} / 2));
+    }
+  }
+}
+
+.itemHorizontal {
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  min-width: 0;
+}
+
 .image {
   object-fit: cover;
 }
