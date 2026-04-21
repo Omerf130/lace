@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "@/lib/mongodb";
 import { getAuthFromCookies } from "@/lib/auth";
 import { SiteSettings } from "@/models/SiteSettings";
@@ -44,16 +45,28 @@ export async function PUT(request: NextRequest) {
 
     await connectToDatabase();
     const body = await request.json();
-    const { coverVideoUrl, coverImageUrl, coverType } = body;
+    const {
+      coverVideoUrl,
+      coverImageUrl,
+      coverType,
+      homeLogoText,
+      homeLogoImageUrl,
+    } = body;
 
     const update: Record<string, string> = {};
     if (coverVideoUrl !== undefined) update.coverVideoUrl = coverVideoUrl;
     if (coverImageUrl !== undefined) update.coverImageUrl = coverImageUrl;
     if (coverType !== undefined) update.coverType = coverType;
+    if (homeLogoText !== undefined) update.homeLogoText = String(homeLogoText).trim();
+    if (homeLogoImageUrl !== undefined) {
+      update.homeLogoImageUrl = String(homeLogoImageUrl).trim();
+    }
 
     const settings = await getOrCreateSettings();
     Object.assign(settings, update);
     await settings.save();
+
+    revalidatePath("/");
 
     return NextResponse.json<ApiResponse>({
       success: true,

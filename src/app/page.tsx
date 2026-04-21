@@ -14,6 +14,9 @@ export default async function HomePage() {
   const coverVideoUrl = settings?.coverVideoUrl;
   const coverImageUrl = settings?.coverImageUrl;
 
+  const homeLogoText = settings?.homeLogoText?.trim() ?? "";
+  const homeLogoImageUrl = settings?.homeLogoImageUrl?.trim() ?? "";
+
   return (
     <main className={styles.hero}>
       {coverType === "video" && coverVideoUrl && (
@@ -42,7 +45,22 @@ export default async function HomePage() {
       <div className={styles.overlay} />
 
       <Link href="/menu" className={styles.content}>
-        <h1 className={styles.title}>LACE</h1>
+        {homeLogoText ? (
+          <h1 className={styles.title}>{homeLogoText}</h1>
+        ) : homeLogoImageUrl ? (
+          <span className={styles.logoImageWrap}>
+            <Image
+              src={homeLogoImageUrl}
+              alt="LACE"
+              fill
+              priority
+              sizes="(max-width: 768px) 85vw, 28rem"
+              className={styles.logoImage}
+            />
+          </span>
+        ) : (
+          <h1 className={styles.title}>LACE</h1>
+        )}
       </Link>
     </main>
   );

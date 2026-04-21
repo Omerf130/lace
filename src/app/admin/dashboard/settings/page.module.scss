@@ -8,6 +8,56 @@
   margin-bottom: $space-8;
 }
 
+.logoSection {
+  margin-bottom: $space-8;
+
+  .sectionTitle {
+    margin-bottom: $space-3;
+  }
+}
+
+.helpText {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-normal;
+  margin-bottom: $space-5;
+  max-width: 40rem;
+}
+
+.fieldLabel {
+  display: block;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-2;
+  margin-top: $space-4;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+.textInput {
+  width: 100%;
+  max-width: 28rem;
+  padding: $space-2 $space-3;
+  font-size: $font-size-base;
+  color: $color-text;
+  background: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+  }
+}
+
 .sections {
   display: grid;
   grid-template-columns: 1fr;

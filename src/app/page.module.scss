@@ -52,3 +52,14 @@
   text-transform: uppercase;
   user-select: none;
 }
+
+.logoImageWrap {
+  position: relative;
+  display: block;
+  width: min(85vw, 40rem);
+  height: min(35vh, 20rem);
+}
+
+.logoImage {
+  object-fit: contain;
+}

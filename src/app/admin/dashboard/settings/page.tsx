@@ -19,9 +19,13 @@ export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [uploadingVideo, setUploadingVideo] = useState(false);
   const [uploadingImage, setUploadingImage] = useState(false);
+  const [homeLogoText, setHomeLogoText] = useState("");
+  const [homeLogoImageUrl, setHomeLogoImageUrl] = useState("");
+  const [uploadingLogoImage, setUploadingLogoImage] = useState(false);
   const [message, setMessage] = useState("");
   const videoInputRef = useRef<HTMLInputElement>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const logoImageInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     fetch("/api/settings")
@@ -31,6 +35,8 @@ export default function SettingsPage() {
           setCoverVideoUrl(json.data.coverVideoUrl || "");
           setCoverImageUrl(json.data.coverImageUrl || "");
           setCoverType(json.data.coverType || "");
+          setHomeLogoText(json.data.homeLogoText || "");
+          setHomeLogoImageUrl(json.data.homeLogoImageUrl || "");
         }
       })
       .finally(() => setLoading(false));
@@ -68,7 +74,13 @@ export default function SettingsPage() {
       const res = await fetch("/api/settings", {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ coverVideoUrl, coverImageUrl, coverType }),
+        body: JSON.stringify({
+          coverVideoUrl,
+          coverImageUrl,
+          coverType,
+          homeLogoText,
+          homeLogoImageUrl,
+        }),
       });
       const data = await res.json();
       if (data.success) {
@@ -88,6 +100,69 @@ export default function SettingsPage() {
   return (
     <div>
       <h1 className={styles.title}>Homepage Settings</h1>
+
+      <section className={`${styles.section} ${styles.logoSection}`}>
+        <h2 className={styles.sectionTitle}>Homepage logo</h2>
+        <p className={styles.helpText}>
+          If logo text is set, it is shown instead of the image. If both are
+          empty, the homepage shows &quot;LACE&quot;.
+        </p>
+
+        <label className={styles.fieldLabel} htmlFor="homeLogoText">
+          Logo text (optional)
+        </label>
+        <input
+          id="homeLogoText"
+          type="text"
+          className={styles.textInput}
+          value={homeLogoText}
+          onChange={(e) => setHomeLogoText(e.target.value)}
+          placeholder="LACE"
+          autoComplete="off"
+        />
+
+        <p className={styles.fieldLabel}>Logo image (optional)</p>
+        {homeLogoImageUrl && (
+          <div className={styles.preview}>
+            <Image
+              src={homeLogoImageUrl}
+              alt="Logo preview"
+              width={400}
+              height={160}
+              className={styles.previewMedia}
+            />
+            <button
+              type="button"
+              className={styles.removeBtn}
+              onClick={() => setHomeLogoImageUrl("")}
+            >
+              Remove
+            </button>
+          </div>
+        )}
+
+        <button
+          type="button"
+          className={styles.uploadBtn}
+          onClick={() => logoImageInputRef.current?.click()}
+          disabled={uploadingLogoImage}
+        >
+          {uploadingLogoImage ? "Uploading..." : "Upload logo image"}
+        </button>
+        <input
+          ref={logoImageInputRef}
+          type="file"
+          accept="image/jpeg,image/png,image/webp,image/avif"
+          className={styles.hidden}
+          onChange={(e) => {
+            const file = e.target.files?.[0];
+            if (file) {
+              handleUpload(file, setHomeLogoImageUrl, setUploadingLogoImage);
+            }
+            e.target.value = "";
+          }}
+        />
+      </section>
 
       <div className={styles.sections}>
         <section className={styles.section}>
