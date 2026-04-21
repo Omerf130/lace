@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import slugify from "slugify";
+import { slugFromNames } from "@/lib/slugFromNames";
 import type { IInfluencer } from "@/types";
 
 const InfluencerSchema = new Schema<IInfluencer>(
@@ -24,10 +24,7 @@ const InfluencerSchema = new Schema<IInfluencer>(
 
 InfluencerSchema.pre("validate", function () {
   if (this.firstName && this.lastName) {
-    this.slug = slugify(`${this.firstName} ${this.lastName}`, {
-      lower: true,
-      strict: true,
-    });
+    this.slug = slugFromNames(this.firstName, this.lastName, "influencer");
   }
 });
 

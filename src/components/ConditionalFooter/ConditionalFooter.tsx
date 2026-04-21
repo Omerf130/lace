@@ -5,7 +5,12 @@ import Footer from "@/components/Footer/Footer";
 
 export default function ConditionalFooter() {
   const pathname = usePathname();
-  if (pathname === "/" || pathname.startsWith("/admin")) {
+  if (
+    pathname === "/" ||
+    pathname === "/menu" ||
+    pathname.startsWith("/menu/") ||
+    pathname.startsWith("/admin")
+  ) {
     return null;
   }
   return <Footer />;
