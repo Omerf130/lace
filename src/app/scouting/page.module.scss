@@ -2,7 +2,7 @@
 @use "../../styles/mixins" as *;
 
 .main {
-  padding-top: calc(#{$navbar-height} + #{$space-10});
+  padding-top: $space-10;
   padding-bottom: $space-16;
   min-height: 100vh;
 }

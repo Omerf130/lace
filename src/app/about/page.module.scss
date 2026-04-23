@@ -3,7 +3,7 @@
 
 .main {
   @include container;
-  padding-top: calc(#{$navbar-height} + #{$space-16});
+  padding-top: $space-16;
   padding-bottom: $space-16;
   min-height: 100vh;
 }

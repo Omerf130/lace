@@ -14,22 +14,26 @@ interface InfluencerFormProps {
 interface FormState {
   firstName: string;
   lastName: string;
+  hebrewName: string;
   image: string;
   tiktokUrl: string;
   tiktokFollowers: string;
   instagramUrl: string;
   instagramFollowers: string;
+  youtubeUrl: string;
 }
 
 function getInitial(data?: IInfluencer): FormState {
   return {
     firstName: data?.firstName ?? "",
     lastName: data?.lastName ?? "",
+    hebrewName: data?.hebrewName ?? "",
     image: data?.image ?? "",
     tiktokUrl: data?.tiktokUrl ?? "",
     tiktokFollowers: data?.tiktokFollowers ? String(data.tiktokFollowers) : "",
     instagramUrl: data?.instagramUrl ?? "",
     instagramFollowers: data?.instagramFollowers ? String(data.instagramFollowers) : "",
+    youtubeUrl: data?.youtubeUrl ?? "",
   };
 }
 
@@ -58,12 +62,14 @@ export default function InfluencerForm({ initialData }: InfluencerFormProps) {
     const payload = {
       firstName: capitalizeWords(form.firstName.trim()),
       lastName: capitalizeWords(form.lastName.trim()),
+      hebrewName: form.hebrewName.trim(),
       status,
       image: form.image,
       tiktokUrl: form.tiktokUrl.trim(),
       tiktokFollowers: Number(form.tiktokFollowers) || 0,
       instagramUrl: form.instagramUrl.trim(),
       instagramFollowers: Number(form.instagramFollowers) || 0,
+      youtubeUrl: form.youtubeUrl.trim(),
     };
 
     try {
@@ -104,6 +110,20 @@ export default function InfluencerForm({ initialData }: InfluencerFormProps) {
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Basic Info</h2>
+
+        <div className={styles.row}>
+          <label className={`${styles.field} ${styles.fieldFull}`}>
+            <span className={styles.label}>Hebrew name (optional)</span>
+            <input
+              type="text"
+              value={form.hebrewName}
+              onChange={(e) => update("hebrewName", e.target.value)}
+              className={styles.input}
+              placeholder="e.g. בל אגם"
+              dir="rtl"
+            />
+          </label>
+        </div>
 
         <div className={styles.row}>
           <label className={styles.field}>
@@ -172,6 +192,19 @@ export default function InfluencerForm({ initialData }: InfluencerFormProps) {
               onChange={(e) => update("tiktokFollowers", e.target.value)}
               className={styles.input}
               placeholder="e.g. 46.6"
+            />
+          </label>
+        </div>
+
+        <div className={styles.row}>
+          <label className={`${styles.field} ${styles.fieldFull}`}>
+            <span className={styles.label}>YouTube URL</span>
+            <input
+              type="url"
+              value={form.youtubeUrl}
+              onChange={(e) => update("youtubeUrl", e.target.value)}
+              className={styles.input}
+              placeholder="https://youtube.com/@..."
             />
           </label>
         </div>

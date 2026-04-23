@@ -5,7 +5,7 @@
   @include flex-center;
   @include flex-col;
   min-height: 100vh;
-  padding-top: $navbar-height;
+  padding-top: $space-10;
   gap: $space-4;
 }
 

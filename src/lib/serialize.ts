@@ -32,6 +32,7 @@ export function serializeInfluencer(inf: IInfluencer): SerializedInfluencer {
     _id: inf._id.toString(),
     firstName: inf.firstName,
     lastName: inf.lastName,
+    hebrewName: inf.hebrewName || "",
     slug: inf.slug,
     status: inf.status,
     image: inf.image,
@@ -39,6 +40,7 @@ export function serializeInfluencer(inf: IInfluencer): SerializedInfluencer {
     tiktokFollowers: inf.tiktokFollowers || 0,
     instagramUrl: inf.instagramUrl || "",
     instagramFollowers: inf.instagramFollowers || 0,
+    youtubeUrl: inf.youtubeUrl || "",
     createdAt: inf.createdAt.toISOString(),
     updatedAt: inf.updatedAt.toISOString(),
   };

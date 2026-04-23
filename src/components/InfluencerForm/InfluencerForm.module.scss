@@ -46,6 +46,10 @@
   gap: $space-2;
 }
 
+.fieldFull {
+  grid-column: 1 / -1;
+}
+
 .label {
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;

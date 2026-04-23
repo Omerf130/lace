@@ -2,6 +2,7 @@ import Image from "next/image";
 import { connectToDatabase } from "@/lib/mongodb";
 import { Influencer } from "@/models/Influencer";
 import Navbar from "@/components/Navbar/Navbar";
+import InfluencerSocialRow from "@/components/InfluencerSocialRow/InfluencerSocialRow";
 import type { IInfluencer } from "@/types";
 import styles from "./page.module.scss";
 
@@ -31,9 +32,10 @@ export default async function InfluencersPage() {
             {influencers.map((inf) => {
               const id = inf._id.toString();
               const fullName = `${inf.firstName} ${inf.lastName}`;
+              const hebrew = inf.hebrewName?.trim();
 
               return (
-                <div key={id} className={styles.card}>
+                <article key={id} className={styles.card}>
                   <div className={styles.imageWrapper}>
                     {inf.image ? (
                       <Image
@@ -47,32 +49,22 @@ export default async function InfluencersPage() {
                       <div className={styles.placeholder} />
                     )}
                   </div>
-                  <div className={styles.info}>
-                    <h2 className={styles.name}>{fullName}</h2>
-                    <div className={styles.socials}>
-                      {inf.tiktokUrl && (
-                        <a
-                          href={inf.tiktokUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.socialLink}
-                        >
-                          {inf.tiktokFollowers ? `${inf.tiktokFollowers}K ` : ""}TikTok
-                        </a>
-                      )}
-                      {inf.instagramUrl && (
-                        <a
-                          href={inf.instagramUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className={styles.socialLink}
-                        >
-                          {inf.instagramFollowers ? `${inf.instagramFollowers}K ` : ""}Instagram
-                        </a>
-                      )}
+                  <div className={styles.body}>
+                    <div className={styles.nameRow}>
+                      <span className={styles.nameEn}>{fullName}</span>
+                      {hebrew ? (
+                        <span className={styles.nameHe} dir="rtl">
+                          {hebrew}
+                        </span>
+                      ) : null}
                     </div>
+                    <InfluencerSocialRow
+                      instagramUrl={inf.instagramUrl}
+                      tiktokUrl={inf.tiktokUrl}
+                      youtubeUrl={inf.youtubeUrl}
+                    />
                   </div>
-                </div>
+                </article>
               );
             })}
           </div>

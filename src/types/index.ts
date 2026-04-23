@@ -97,6 +97,7 @@ export interface IInfluencer {
   _id: Types.ObjectId;
   firstName: string;
   lastName: string;
+  hebrewName?: string;
   slug: string;
   status: ModelStatus;
   image: string;
@@ -104,6 +105,7 @@ export interface IInfluencer {
   tiktokFollowers?: number;
   instagramUrl?: string;
   instagramFollowers?: number;
+  youtubeUrl?: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -112,6 +114,7 @@ export interface SerializedInfluencer {
   _id: string;
   firstName: string;
   lastName: string;
+  hebrewName?: string;
   slug: string;
   status: ModelStatus;
   image: string;
@@ -119,6 +122,7 @@ export interface SerializedInfluencer {
   tiktokFollowers?: number;
   instagramUrl?: string;
   instagramFollowers?: number;
+  youtubeUrl?: string;
   createdAt: string;
   updatedAt: string;
 }

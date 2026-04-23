@@ -6,6 +6,7 @@ const InfluencerSchema = new Schema<IInfluencer>(
   {
     firstName: { type: String, required: true, trim: true },
     lastName: { type: String, required: true, trim: true },
+    hebrewName: { type: String, default: "", trim: true },
     slug: { type: String, unique: true, index: true },
     status: {
       type: String,
@@ -18,6 +19,7 @@ const InfluencerSchema = new Schema<IInfluencer>(
     tiktokFollowers: { type: Number, default: 0 },
     instagramUrl: { type: String, default: "" },
     instagramFollowers: { type: Number, default: 0 },
+    youtubeUrl: { type: String, default: "" },
   },
   { timestamps: true }
 );
