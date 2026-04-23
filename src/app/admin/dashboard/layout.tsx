@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import BrandMark from "@/components/BrandMark/BrandMark";
 import styles from "./layout.module.scss";
 
 export default function DashboardLayout({
@@ -23,7 +24,7 @@ export default function DashboardLayout({
     <div className={styles.wrapper}>
       <aside className={styles.sidebar}>
         <Link href="/" className={styles.logo}>
-          LACE
+          <BrandMark variant="admin" />
         </Link>
 
         <nav className={styles.nav}>

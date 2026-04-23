@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BrandMark from "@/components/BrandMark/BrandMark";
 import { NAV_ITEMS } from "@/lib/navLinks";
 import styles from "./page.module.scss";
 
@@ -10,7 +11,7 @@ export default function MenuPage() {
   return (
     <main className={styles.page}>
       <Link href="/" className={styles.logo}>
-        LACE
+        <BrandMark variant="menu" />
       </Link>
 
       <nav className={styles.nav}>

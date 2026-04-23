@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/navLinks";
+import BrandMark from "@/components/BrandMark/BrandMark";
 import styles from "./Footer.module.scss";
 
 export default function Footer() {
@@ -15,7 +16,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <Link href="/menu" className={styles.brand}>
-          LACE
+          <BrandMark variant="footer" />
         </Link>
 
         <nav className={styles.nav} aria-label="Site">

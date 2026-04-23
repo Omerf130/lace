@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import BrandMark from "@/components/BrandMark/BrandMark";
 import styles from "./page.module.scss";
 
 export default function AdminLoginPage() {
@@ -41,7 +42,9 @@ export default function AdminLoginPage() {
   return (
     <main className={styles.main}>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <h1 className={styles.title}>LACE</h1>
+        <div className={styles.logoWrap}>
+          <BrandMark variant="adminLogin" />
+        </div>
         <p className={styles.subtitle}>Admin</p>
 
         {error && <div className={styles.error}>{error}</div>}

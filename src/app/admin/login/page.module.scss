@@ -17,11 +17,10 @@
   gap: $space-5;
 }
 
-.title {
-  font-size: $font-size-xl;
-  font-weight: $font-weight-bold;
-  letter-spacing: $letter-spacing-widest;
-  text-align: center;
+.logoWrap {
+  display: flex;
+  justify-content: center;
+  line-height: 0;
 }
 
 .subtitle {

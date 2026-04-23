@@ -21,10 +21,9 @@
 }
 
 .logo {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bold;
-  letter-spacing: $letter-spacing-widest;
-  color: $color-text-light;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
   margin-bottom: $space-10;
 
   &:hover {

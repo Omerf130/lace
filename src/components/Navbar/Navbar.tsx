@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/navLinks";
+import BrandMark from "@/components/BrandMark/BrandMark";
 import styles from "./Navbar.module.scss";
 
 export default function Navbar() {
@@ -14,7 +15,7 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <Link href="/menu" className={styles.logo}>
-        LACE
+        <BrandMark variant="navbar" />
       </Link>
 
       <Link href="/search" className={styles.search} aria-label="Search">

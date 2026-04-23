@@ -24,12 +24,11 @@
 }
 
 .brand {
-  font-size: $font-size-lg;
-  font-weight: $font-weight-bold;
-  letter-spacing: $letter-spacing-widest;
-  text-transform: uppercase;
-  color: $color-text-light;
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
   text-decoration: none;
+  color: $color-text-light;
   flex-shrink: 0;
 
   &:hover {
