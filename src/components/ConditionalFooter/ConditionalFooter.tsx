@@ -1,13 +1,22 @@
 "use client";
 
+import { useSyncExternalStore } from "react";
 import { usePathname } from "next/navigation";
 import Footer from "@/components/Footer/Footer";
+import {
+  normalizePathname,
+  subscribeToBrowserPathname,
+} from "@/lib/browserPathname";
 
 export default function ConditionalFooter() {
-  const hookPathname = usePathname();
-  // On the client, use the real URL so layout-level footer state matches <Link> navigations.
-  const pathname =
-    typeof window !== "undefined" ? window.location.pathname : hookPathname;
+  const serverPath = usePathname();
+  const rawPath = useSyncExternalStore(
+    subscribeToBrowserPathname,
+    () => window.location.pathname,
+    () => serverPath
+  );
+  const pathname = normalizePathname(rawPath);
+
   if (
     pathname === "/" ||
     pathname === "/menu" ||
