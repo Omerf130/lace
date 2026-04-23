@@ -34,6 +34,12 @@ export default function Footer() {
           >
             Search
           </Link>
+          <Link
+            href="/privacy"
+            className={`${styles.link} ${isActive("/privacy") ? styles.active : ""}`}
+          >
+            Privacy Policy
+          </Link>
         </nav>
       </div>
 
