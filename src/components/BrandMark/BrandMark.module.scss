@@ -1,3 +1,5 @@
+@use "../../styles/mixins" as *;
+
 .img {
   width: auto;
   height: auto;
@@ -6,7 +8,11 @@
 }
 
 .navbar {
-  max-height: 10.75rem;
+  max-height: 12rem;
+
+  @include md {
+    max-height: 14.75rem;
+  }
 }
 
 .footer {

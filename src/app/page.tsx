@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import heroLogo from "@/images/IMG_2808.svg";
 import { connectToDatabase } from "@/lib/mongodb";
 import { SiteSettings } from "@/models/SiteSettings";
 import styles from "./page.module.scss";
@@ -15,7 +16,6 @@ export default async function HomePage() {
   const coverImageUrl = settings?.coverImageUrl;
 
   const homeLogoText = settings?.homeLogoText?.trim() ?? "";
-  const homeLogoImageUrl = settings?.homeLogoImageUrl?.trim() ?? "";
 
   return (
     <main className={styles.hero}>
@@ -47,10 +47,10 @@ export default async function HomePage() {
       <Link href="/menu" className={styles.content}>
         {homeLogoText ? (
           <h1 className={styles.title}>{homeLogoText}</h1>
-        ) : homeLogoImageUrl ? (
+        ) : (
           <span className={styles.logoImageWrap}>
             <Image
-              src={homeLogoImageUrl}
+              src={heroLogo}
               alt="LACE"
               fill
               priority
@@ -58,8 +58,6 @@ export default async function HomePage() {
               className={styles.logoImage}
             />
           </span>
-        ) : (
-          <h1 className={styles.title}>LACE</h1>
         )}
       </Link>
     </main>

@@ -4,6 +4,7 @@ import { Influencer } from "@/models/Influencer";
 import Navbar from "@/components/Navbar/Navbar";
 import InfluencerSocialRow from "@/components/InfluencerSocialRow/InfluencerSocialRow";
 import type { IInfluencer } from "@/types";
+import influencersLogo from "@/images/WhatsApp_Image_2026-04-26_at_15.57.15__2_-removebg-preview.png";
 import styles from "./page.module.scss";
 
 export const revalidate = 60;
@@ -21,7 +22,7 @@ export default async function InfluencersPage() {
 
   return (
     <>
-      <Navbar />
+      <Navbar logoSrc={influencersLogo} logoAlt="Influencers" />
       <main className={styles.main}>
         <h1 className={styles.title}>Influencers</h1>
 

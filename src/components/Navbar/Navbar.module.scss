@@ -8,7 +8,7 @@
   position: relative;
   width: 100%;
   height: $navbar-height;
-  padding-inline: $space-6;
+  padding-inline:$space-1;
   background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(8px);
   z-index: $z-sticky;
@@ -30,6 +30,28 @@
   }
 }
 
+.logoImage {
+  width: auto;
+  height: auto;
+  max-height: 12em !important;
+  object-fit: contain;
+  display: block;
+
+  @include md {
+    max-height: 17rem;
+  }
+}
+
+.logoOverride {
+  position: absolute;
+  top: 30px;
+  left: $space-2;
+
+  @include md {
+    left: $space-10;
+  }
+}
+
 .search {
   position: absolute;
   left: 50%;
@@ -44,6 +66,7 @@
 
 .linksWrapper {
   position: relative;
+  margin-left: auto;
 }
 
 .links {

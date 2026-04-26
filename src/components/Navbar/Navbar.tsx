@@ -1,12 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import Image, { type StaticImageData } from "next/image";
 import { usePathname } from "next/navigation";
 import { NAV_ITEMS } from "@/lib/navLinks";
 import BrandMark from "@/components/BrandMark/BrandMark";
 import styles from "./Navbar.module.scss";
 
-export default function Navbar() {
+type NavbarProps = {
+  logoSrc?: StaticImageData;
+  logoAlt?: string;
+};
+
+export default function Navbar({ logoSrc, logoAlt }: NavbarProps = {}) {
   const pathname = usePathname();
 
   const isActive = (path: string) =>
@@ -14,8 +20,21 @@ export default function Navbar() {
 
   return (
     <nav className={styles.navbar}>
-      <Link href="/menu" className={styles.logo}>
-        <BrandMark variant="navbar" />
+      <Link
+        href="/menu"
+        className={`${styles.logo} ${logoSrc ? styles.logoOverride : ""}`}
+      >
+        {logoSrc ? (
+          <Image
+            src={logoSrc}
+            alt={logoAlt ?? "LACE"}
+            className={styles.logoImage}
+            sizes="(max-width: 768px) min(60vw, 320px), 420px"
+            priority
+          />
+        ) : (
+          <BrandMark variant="navbar" />
+        )}
       </Link>
 
       <Link href="/search" className={styles.search} aria-label="Search">
