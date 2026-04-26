@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import brandSrc from "@/images/WhatsApp_Image_2026-04-20_at_15.39.05__1_-removebg-preview.png";
-import menuBrandSrc from "@/images/WhatsApp_Image_2026-04-20_at_15.39.05-removebg-preview (1).png";
+import brandSrc from "@/images/logo1.png";
+import menuBrandSrc from "@/images/logo2.png";
 import styles from "./BrandMark.module.scss";
 
 export type BrandMarkVariant =
@@ -23,9 +23,11 @@ const variantClass: Record<BrandMarkVariant, string> = {
 export default function BrandMark({ variant }: { variant: BrandMarkVariant }) {
   const src = variant === "menu" ? menuBrandSrc : brandSrc;
   const sizes =
-    variant === "menu" || variant === "navbar"
-      ? "(max-width: 768px) min(92vw, 420px), 640px"
-      : "(max-width: 768px) 180px, 280px";
+    variant === "menu"
+      ? "(max-width: 768px) min(92vw, 480px), 720px"
+      : variant === "navbar"
+        ? "(max-width: 768px) min(92vw, 560px), 840px"
+        : "(max-width: 768px) 280px, 440px";
 
   return (
     <Image
