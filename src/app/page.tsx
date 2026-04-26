@@ -54,7 +54,7 @@ export default async function HomePage() {
               alt="LACE"
               fill
               priority
-              sizes="(max-width: 768px) 85vw, 28rem"
+              sizes="(max-width: 768px) 98vw, 1200px"
               className={styles.logoImage}
             />
           </span>
