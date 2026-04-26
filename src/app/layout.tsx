@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   },
   description: "LACE — a boutique models agency representing curated talent worldwide.",
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     type: "website",
     siteName: "LACE",
