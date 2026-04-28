@@ -8,7 +8,8 @@ import styles from "./ModelGrid.module.scss";
 interface ModelGridProps {
   initialModels: SerializedModel[];
   initialCursor: string | null;
-  category: ModelCategory;
+  /** When omitted, the grid loads models across all categories (e.g. the combined AI page). */
+  category?: ModelCategory;
   /** When true, this grid loads only AI models; when false, only non-AI models. */
   isAiModel: boolean;
 }
@@ -29,10 +30,12 @@ export default function ModelGrid({
     setLoading(true);
 
     try {
-      const aiParam = isAiModel ? "true" : "false";
-      const res = await fetch(
-        `/api/models?category=${category}&cursor=${cursor}&limit=12&isAiModel=${aiParam}`
-      );
+      const params = new URLSearchParams();
+      if (category) params.set("category", category);
+      if (cursor) params.set("cursor", cursor);
+      params.set("limit", "12");
+      params.set("isAiModel", isAiModel ? "true" : "false");
+      const res = await fetch(`/api/models?${params.toString()}`);
       const json = await res.json();
 
       if (json.success && json.data) {

@@ -40,25 +40,10 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     .limit(PAGE_SIZE + 1)
     .lean<IModel[]>();
 
-  const aiDocs = await TalentModel.find({
-    category: cat,
-    status: "published",
-    isAiModel: true,
-  })
-    .sort({ _id: 1 })
-    .limit(PAGE_SIZE + 1)
-    .lean<IModel[]>();
-
-  function slicePage(docs: IModel[]) {
-    const hasMore = docs.length > PAGE_SIZE;
-    const raw = hasMore ? docs.slice(0, PAGE_SIZE) : docs;
-    const items = serializeModels(raw);
-    const nextCursor = hasMore ? items[items.length - 1]._id : null;
-    return { items, nextCursor };
-  }
-
-  const regular = slicePage(regularDocs);
-  const ai = slicePage(aiDocs);
+  const hasMore = regularDocs.length > PAGE_SIZE;
+  const raw = hasMore ? regularDocs.slice(0, PAGE_SIZE) : regularDocs;
+  const items = serializeModels(raw);
+  const nextCursor = hasMore ? items[items.length - 1]._id : null;
 
   const label = category === "women" ? "Women" : "Men";
 
@@ -68,22 +53,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
       <main className={styles.main}>
         <h1 className={styles.title}>{label}</h1>
         <ModelGrid
-          initialModels={regular.items}
-          initialCursor={regular.nextCursor}
+          initialModels={items}
+          initialCursor={nextCursor}
           category={cat}
           isAiModel={false}
         />
-        {ai.items.length > 0 && (
-          <>
-            <h2 className={styles.subtitle}>AI models</h2>
-            <ModelGrid
-              initialModels={ai.items}
-              initialCursor={ai.nextCursor}
-              category={cat}
-              isAiModel={true}
-            />
-          </>
-        )}
       </main>
     </>
   );
