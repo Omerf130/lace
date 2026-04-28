@@ -20,6 +20,7 @@ type FieldKey =
   | "email"
   | "phone"
   | "gender"
+  | "height"
   | "face"
   | "side"
   | "chest"
@@ -38,6 +39,7 @@ function validateScoutingForm(form: HTMLFormElement): FieldErrors {
   const email = String(fd.get("email") ?? "").trim();
   const phone = String(fd.get("phone") ?? "").trim();
   const gender = String(fd.get("gender") ?? "").trim();
+  const height = String(fd.get("height") ?? "").trim();
 
   if (!firstName) errors.firstName = "First name is required.";
   if (!lastName) errors.lastName = "Last name is required.";
@@ -46,6 +48,14 @@ function validateScoutingForm(form: HTMLFormElement): FieldErrors {
   if (!phone) errors.phone = "Phone is required.";
   if (!["male", "female", "non-binary"].includes(gender)) {
     errors.gender = "Please select a gender.";
+  }
+  if (!height) {
+    errors.height = "Height is required.";
+  } else {
+    const n = Number(height);
+    if (!Number.isFinite(n) || n < 100 || n > 230) {
+      errors.height = "Please enter a valid height in cm (100–230).";
+    }
   }
 
   for (const { name } of PHOTO_FIELDS) {
@@ -360,6 +370,30 @@ export default function ScoutingForm() {
           )}
         </div>
 
+        <div className={styles.field} id="scouting-err-height">
+          <label className={styles.fieldInner} htmlFor="scouting-height">
+            <span className={styles.label}>Height (cm) *</span>
+            <input
+              id="scouting-height"
+              name="height"
+              type="number"
+              inputMode="numeric"
+              min={100}
+              max={230}
+              step={1}
+              className={`${styles.input} ${fieldErrors.height ? styles.inputInvalid : ""}`}
+              aria-invalid={!!fieldErrors.height}
+              aria-describedby={fieldErrors.height ? "err-height" : undefined}
+              onChange={() => clearField("height")}
+            />
+          </label>
+          {fieldErrors.height && (
+            <p id="err-height" className={styles.fieldError} role="alert">
+              {fieldErrors.height}
+            </p>
+          )}
+        </div>
+
         <fieldset
           className={`${styles.fieldset} ${fieldErrors.gender ? styles.fieldsetInvalid : ""}`}
           id="scouting-err-gender"
@@ -400,6 +434,8 @@ export default function ScoutingForm() {
             </p>
           )}
         </fieldset>
+
+       
 
         <h2 className={styles.sectionTitle}>Photos *</h2>
         <p className={styles.hint}>Four images required. Max ~900 KB each (~3.5 MB total).</p>

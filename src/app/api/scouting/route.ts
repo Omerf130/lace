@@ -36,6 +36,8 @@ export async function POST(request: NextRequest) {
     const email = String(formData.get("email") ?? "").trim();
     const phone = String(formData.get("phone") ?? "").trim();
     const gender = String(formData.get("gender") ?? "").trim();
+    const heightStr = String(formData.get("height") ?? "").trim();
+    const height = Number(heightStr);
     const consentPrivacy =
       formData.get("consentPrivacy") === "on" ||
       formData.get("consentPrivacy") === "true";
@@ -53,6 +55,13 @@ export async function POST(request: NextRequest) {
     if (!["male", "female", "non-binary"].includes(gender)) {
       return NextResponse.json<ApiResponse>(
         { success: false, error: "Please select a gender option." },
+        { status: 400 }
+      );
+    }
+
+    if (!heightStr || !Number.isFinite(height) || height < 100 || height > 230) {
+      return NextResponse.json<ApiResponse>(
+        { success: false, error: "Please enter a valid height in cm (100–230)." },
         { status: 400 }
       );
     }
@@ -120,6 +129,7 @@ export async function POST(request: NextRequest) {
       `Email: ${email}`,
       `Phone: ${phone}`,
       `Gender: ${genderLabel}`,
+      `Height: ${height} cm`,
       "",
       "Photos are attached: face, side, chest, body.",
       "",
