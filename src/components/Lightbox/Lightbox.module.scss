@@ -1,0 +1,114 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  background: rgba(0, 0, 0, 0.94);
+  @include flex-center;
+  padding: $space-4;
+  animation: fadeIn $transition-base;
+}
+
+.imageWrapper {
+  position: relative;
+  width: min(90vw, 1400px);
+  height: 90vh;
+  max-height: 90vh;
+}
+
+.image {
+  object-fit: contain;
+  user-select: none;
+}
+
+.close {
+  position: absolute;
+  top: $space-4;
+  right: $space-4;
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  color: $color-text-light;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  @include flex-center;
+  border-radius: $border-radius-full;
+  transition: background $transition-fast, transform $transition-fast;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.05);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text-light;
+    outline-offset: 2px;
+  }
+
+  @include md {
+    top: $space-6;
+    right: $space-6;
+    width: 52px;
+    height: 52px;
+    font-size: 2.4rem;
+  }
+}
+
+.nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  background: transparent;
+  border: 0;
+  color: $color-text-light;
+  font-size: 3rem;
+  line-height: 1;
+  cursor: pointer;
+  @include flex-center;
+  border-radius: $border-radius-full;
+  transition: background $transition-fast;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text-light;
+    outline-offset: 2px;
+  }
+
+  @include md {
+    width: 56px;
+    height: 56px;
+    font-size: 3.5rem;
+  }
+}
+
+.prev {
+  left: $space-3;
+
+  @include md {
+    left: $space-6;
+  }
+}
+
+.next {
+  right: $space-3;
+
+  @include md {
+    right: $space-6;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

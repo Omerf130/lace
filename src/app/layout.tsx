@@ -18,6 +18,13 @@ const romanSd = localFont({
   weight: "400",
 });
 
+const solveraLorvane = localFont({
+  src: "./fonts/Solvera Lorvane.ttf",
+  variable: "--font-solvera-lorvane",
+  display: "swap",
+  weight: "400",
+});
+
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
@@ -46,7 +53,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${vogue.variable} ${romanSd.variable} ${geistMono.variable}`}
+      className={`${vogue.variable} ${romanSd.variable} ${solveraLorvane.variable} ${geistMono.variable}`}
     >
       <body className={vogue.className}>
         {children}

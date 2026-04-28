@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { connectToDatabase } from "@/lib/mongodb";
 import { TalentModel } from "@/models/Model";
 import Navbar from "@/components/Navbar/Navbar";
-import GallerySlider from "@/components/GallerySlider/GallerySlider";
+import ModelGalleries from "@/components/ModelGalleries/ModelGalleries";
 import type { IModel, ModelCategory } from "@/types";
 import styles from "./page.module.scss";
 
@@ -95,26 +95,15 @@ export default async function ModelPage({ params }: ModelPageProps) {
           {attrs.eyes && <Attr label="Eyes" value={attrs.eyes} />}
         </div>
 
-        {(() => {
-          const allImages = [
+        <ModelGalleries
+          portraitImages={[
             ...(model.images.main ? [model.images.main] : []),
             ...model.images.gallery,
-          ];
-          return allImages.length > 0 ? (
-            <GallerySlider images={allImages} alt={fullName} />
-          ) : null;
-        })()}
-
-        {model.images.horizontalGallery &&
-          model.images.horizontalGallery.length > 0 && (
-            <section className={styles.horizontalSection} aria-label="Landscape images">
-              <GallerySlider
-                images={model.images.horizontalGallery}
-                alt={`${fullName} — landscape`}
-                layout="horizontal"
-              />
-            </section>
-          )}
+          ]}
+          horizontalImages={model.images.horizontalGallery ?? []}
+          coverVideo={model.images.coverVideo || undefined}
+          alt={fullName}
+        />
       </main>
     </>
   );

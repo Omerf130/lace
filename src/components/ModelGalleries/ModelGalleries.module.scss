@@ -1,0 +1,30 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.horizontalSection {
+  margin-top: $space-10;
+  padding-bottom: $space-8;
+}
+
+.videoSection {
+  margin-top: $space-10;
+  padding-bottom: $space-8;
+  padding-inline: $space-4;
+
+  @include md {
+    padding-inline: $space-6;
+  }
+}
+
+.videoWrapper {
+  width: 100%;
+  max-width: min(320px, 100%);
+  margin-inline: auto;
+  background: $color-background-alt;
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: auto;
+}

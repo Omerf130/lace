@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./GallerySlider.module.scss";
 
@@ -8,6 +10,8 @@ interface GallerySliderProps {
   alt: string;
   /** portrait: 3/4 tiles (default). horizontal: 16/9 landscape tiles for horizontal galleries. */
   layout?: GalleryLayout;
+  /** When provided, each image is rendered as a button that calls this handler with its index in `images`. */
+  onImageClick?: (index: number) => void;
 }
 
 function groupIntoRows(images: string[]): string[][] {
@@ -39,6 +43,7 @@ export default function GallerySlider({
   images,
   alt,
   layout = "portrait",
+  onImageClick,
 }: GallerySliderProps) {
   if (images.length === 0) return null;
 
@@ -66,19 +71,37 @@ export default function GallerySlider({
               layout === "horizontal"
                 ? `${styles.item} ${styles.itemHorizontal}`
                 : styles.item;
+            const sizes =
+              layout === "horizontal"
+                ? "(max-width: 639px) 100vw, (max-width: 1023px) 42vw, min(420px, 38vw)"
+                : "250px";
+            const imgEl = (
+              <Image
+                src={src}
+                alt={`${alt} — ${idx + 1}`}
+                fill
+                sizes={sizes}
+                className={styles.image}
+              />
+            );
+
+            if (onImageClick) {
+              return (
+                <button
+                  key={src}
+                  type="button"
+                  className={`${itemClass} ${styles.itemButton}`}
+                  onClick={() => onImageClick(idx)}
+                  aria-label={`Open image ${idx + 1}`}
+                >
+                  {imgEl}
+                </button>
+              );
+            }
+
             return (
               <div key={src} className={itemClass}>
-                <Image
-                  src={src}
-                  alt={`${alt} — ${idx + 1}`}
-                  fill
-                  sizes={
-                    layout === "horizontal"
-                      ? "(max-width: 639px) 100vw, (max-width: 1023px) 42vw, min(420px, 38vw)"
-                      : "250px"
-                  }
-                  className={styles.image}
-                />
+                {imgEl}
               </div>
             );
           })}
