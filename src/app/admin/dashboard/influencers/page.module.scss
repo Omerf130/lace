@@ -59,7 +59,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 64px 1fr 100px 200px;
+  grid-template-columns: 64px 1fr 100px 240px;
   padding: $space-3 $space-4;
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
@@ -72,7 +72,7 @@
 
 .row {
   display: grid;
-  grid-template-columns: 64px 1fr 100px 200px;
+  grid-template-columns: 64px 1fr 100px 240px;
   align-items: center;
   padding: $space-3 $space-4;
   border-bottom: 1px solid $color-border;
@@ -112,12 +112,13 @@
 
 .colActions {
   display: flex;
-  gap: $space-2;
+  gap: $space-1;
+  justify-content: flex-end;
 }
 
 .editBtn,
 .deleteBtn {
-  padding: $space-1 $space-3;
+  padding: $space-1 $space-2;
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
   letter-spacing: $letter-spacing-wide;
@@ -127,6 +128,7 @@
   background: $color-background;
   color: $color-text;
   cursor: pointer;
+  white-space: nowrap;
   transition: background $transition-fast;
 
   &:hover {
@@ -175,7 +177,7 @@
 }
 
 .statusBtn {
-  padding: $space-1 $space-3;
+  padding: $space-1 $space-2;
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
   letter-spacing: $letter-spacing-wide;
@@ -185,6 +187,7 @@
   background: $color-background;
   color: $color-text;
   cursor: pointer;
+  white-space: nowrap;
   transition: background $transition-fast;
 
   &:hover {
