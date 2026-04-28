@@ -37,6 +37,11 @@ const ModelSchema = new Schema<IModel>(
       hair: { type: String, default: "" },
       eyes: { type: String, default: "" },
     },
+    sortOrder: {
+      type: Number,
+      default: () => Date.now(),
+      index: true,
+    },
   },
   { timestamps: true }
 );

@@ -68,6 +68,8 @@ export interface IModel {
   instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;
+  /** Numeric sort key used to order models on listing pages and the admin dashboard. Lower = earlier. */
+  sortOrder: number;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -87,6 +89,7 @@ export interface SerializedModel {
   instagramUrl?: string;
   images: ModelImages;
   attributes: ModelAttributes;
+  sortOrder: number;
   createdAt: string;
   updatedAt: string;
 }

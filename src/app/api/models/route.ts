@@ -55,18 +55,28 @@ export async function GET(request: NextRequest) {
     }
 
     if (cursor) {
-      filter._id = { $gt: cursor };
+      const sep = cursor.lastIndexOf("_");
+      if (sep > 0) {
+        const cSort = Number(cursor.slice(0, sep));
+        const cId = cursor.slice(sep + 1);
+        if (Number.isFinite(cSort)) {
+          filter.$or = [
+            { sortOrder: { $gt: cSort } },
+            { sortOrder: cSort, _id: { $gt: cId } },
+          ];
+        }
+      }
     }
 
     const models = await TalentModel.find(filter)
-      .sort({ _id: 1 })
+      .sort({ sortOrder: 1, _id: 1 })
       .limit(limit + 1)
       .lean<IModel[]>();
 
     const hasMore = models.length > limit;
     const items = hasMore ? models.slice(0, limit) : models;
     const nextCursor = hasMore
-      ? items[items.length - 1]._id.toString()
+      ? `${items[items.length - 1].sortOrder}_${items[items.length - 1]._id.toString()}`
       : null;
 
     return NextResponse.json<ApiResponse<PaginatedResponse<SerializedModel>>>({

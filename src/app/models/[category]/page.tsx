@@ -36,14 +36,16 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
     status: "published",
     isAiModel: { $ne: true },
   })
-    .sort({ _id: 1 })
+    .sort({ sortOrder: 1, _id: 1 })
     .limit(PAGE_SIZE + 1)
     .lean<IModel[]>();
 
   const hasMore = regularDocs.length > PAGE_SIZE;
   const raw = hasMore ? regularDocs.slice(0, PAGE_SIZE) : regularDocs;
   const items = serializeModels(raw);
-  const nextCursor = hasMore ? items[items.length - 1]._id : null;
+  const nextCursor = hasMore
+    ? `${items[items.length - 1].sortOrder}_${items[items.length - 1]._id}`
+    : null;
 
   const label = category === "women" ? "Women" : "Men";
 

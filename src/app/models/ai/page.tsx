@@ -17,14 +17,16 @@ export default async function AiModelsPage() {
     status: "published",
     isAiModel: true,
   })
-    .sort({ _id: 1 })
+    .sort({ sortOrder: 1, _id: 1 })
     .limit(PAGE_SIZE + 1)
     .lean<IModel[]>();
 
   const hasMore = docs.length > PAGE_SIZE;
   const raw = hasMore ? docs.slice(0, PAGE_SIZE) : docs;
   const items = serializeModels(raw);
-  const nextCursor = hasMore ? items[items.length - 1]._id : null;
+  const nextCursor = hasMore
+    ? `${items[items.length - 1].sortOrder}_${items[items.length - 1]._id}`
+    : null;
 
   return (
     <>

@@ -13,6 +13,31 @@
 .header {
   @include flex-between;
   margin-bottom: $space-8;
+  gap: $space-4;
+}
+
+.headerRight {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+}
+
+.savePill {
+  font-size: $font-size-xs;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  padding: $space-1 $space-3;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-full;
+  background: $color-background-alt;
+  white-space: nowrap;
+}
+
+.savePillError {
+  color: $color-error;
+  border-color: rgba($color-error, 0.3);
+  background: rgba($color-error, 0.05);
 }
 
 .title {
@@ -59,7 +84,7 @@
 
 .tableHeader {
   display: grid;
-  grid-template-columns: 64px 1fr 100px 100px 200px;
+  grid-template-columns: 32px 64px 1fr 100px 100px 200px;
   padding: $space-3 $space-4;
   font-size: $font-size-xs;
   font-weight: $font-weight-medium;
@@ -72,11 +97,12 @@
 
 .row {
   display: grid;
-  grid-template-columns: 64px 1fr 100px 100px 200px;
+  grid-template-columns: 32px 64px 1fr 100px 100px 200px;
   align-items: center;
   padding: $space-3 $space-4;
   border-bottom: 1px solid $color-border;
-  transition: background $transition-fast;
+  background: $color-background;
+  transition: background $transition-fast, box-shadow $transition-fast;
 
   &:last-child {
     border-bottom: none;
@@ -84,6 +110,50 @@
 
   &:hover {
     background: $color-background-alt;
+  }
+}
+
+.rowDragging {
+  background: $color-background-alt;
+  box-shadow: $shadow-lg;
+  z-index: $z-overlay;
+  position: relative;
+}
+
+.colHandle {
+  width: 32px;
+}
+
+.dragHandle {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: grab;
+  color: $color-text-muted;
+  font-size: $font-size-base;
+  line-height: 1;
+  letter-spacing: -2px;
+  border-radius: $border-radius-sm;
+  touch-action: none;
+  transition: color $transition-fast, background $transition-fast;
+  user-select: none;
+
+  &:hover {
+    color: $color-text;
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+
+  &:focus-visible {
+    @include focus-ring;
   }
 }
 

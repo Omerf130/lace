@@ -18,6 +18,7 @@ export function serializeModel(model: IModel): SerializedModel {
       pdf: model.images.pdf || "",
     },
     attributes: { ...model.attributes },
+    sortOrder: typeof model.sortOrder === "number" ? model.sortOrder : 0,
     createdAt: model.createdAt.toISOString(),
     updatedAt: model.updatedAt.toISOString(),
   };
