@@ -47,6 +47,18 @@ export default function Footer() {
       <p className={styles.copy}>
         &copy; {new Date().getFullYear()} LACE Models. All rights reserved.
       </p>
+
+      <p className={styles.credits}>
+        Built by{" "}
+        <a
+          href="https://weblio.co.il"
+          target="_blank"
+          rel="noopener noreferrer"
+          className={styles.creditsLink}
+        >
+          Weblio
+        </a>
+      </p>
     </footer>
   );
 }
