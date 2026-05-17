@@ -111,7 +111,6 @@ export async function POST(request: NextRequest) {
 
     revalidatePath("/models/men");
     revalidatePath("/models/women");
-    revalidatePath("/models/ai");
 
     return NextResponse.json<ApiResponse<IModel>>(
       { success: true, data: talentModel.toObject() },

@@ -41,7 +41,6 @@ export async function PATCH(request: NextRequest) {
 
     revalidatePath("/models/men");
     revalidatePath("/models/women");
-    revalidatePath("/models/ai");
 
     return NextResponse.json<ApiResponse>({ success: true });
   } catch (error) {
