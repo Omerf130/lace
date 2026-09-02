@@ -53,6 +53,12 @@ export default function DashboardLayout({
             + New Influencer
           </Link>
           <Link
+            href="/admin/dashboard/about"
+            className={`${styles.navLink} ${isActive("/admin/dashboard/about") ? styles.active : ""}`}
+          >
+            About
+          </Link>
+          <Link
             href="/admin/dashboard/settings"
             className={`${styles.navLink} ${isActive("/admin/dashboard/settings") ? styles.active : ""}`}
           >
