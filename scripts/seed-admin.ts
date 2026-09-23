@@ -19,7 +19,7 @@ if (!MONGODB_URI) {
 }
 
 const EMAIL = "admin@lace.com";
-const PASSWORD = "admin123";
+const PASSWORD = "Admin@Lace1234";
 
 async function seed() {
   await mongoose.connect(MONGODB_URI as string);
