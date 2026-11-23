@@ -488,7 +488,7 @@ export default function ScoutingForm() {
 
         <p className={styles.footerNote}>
           If you have trouble uploading, email{" "}
-          <a href="mailto:scouting@lacemodel.com">scouting@lacemodel.com</a>.
+          <a href="mailto:booking@lacemodel.com">booking@lacemodel.com</a>.
         </p>
 
         <button type="submit" className={styles.submit} disabled={status === "sending"}>

@@ -1,10 +1,23 @@
 import Navbar from "@/components/Navbar/Navbar";
+import { gmailComposeUrl } from "@/lib/gmailComposeUrl";
 import { getPageContent } from "@/lib/pageContent";
 import {
   DEFAULT_ABOUT_CONTENT,
   type AboutContent,
 } from "@/lib/aboutContent";
 import styles from "./page.module.scss";
+
+function AboutEmailLink({ email }: { email: string }) {
+  return (
+    <a
+      href={gmailComposeUrl(email)}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {email}
+    </a>
+  );
+}
 
 export const metadata = {
   title: "About",
@@ -32,7 +45,7 @@ export default async function AboutPage() {
                 {ceo.name} — {ceo.title}
               </h2>
               <p className={styles.detail}>
-                <a href={`mailto:${ceo.email}`}>{ceo.email}</a>
+                <AboutEmailLink email={ceo.email} />
               </p>
               {ceo.phones.map((phone, i) => (
                 <p key={i} className={styles.detail}>
@@ -54,7 +67,7 @@ export default async function AboutPage() {
                     {member.name} — {member.title}
                   </h3>
                   <p className={styles.detail}>
-                    <a href={`mailto:${member.email}`}>{member.email}</a>
+                    <AboutEmailLink email={member.email} />
                   </p>
                   {member.phones.map((phone, i) => (
                     <p key={i} className={styles.detail}>
@@ -69,9 +82,7 @@ export default async function AboutPage() {
           <section className={styles.section}>
             <h2 className={styles.heading}>Scouting</h2>
             <p className={styles.detail}>
-              <a href={`mailto:${content.scoutingEmail}`}>
-                {content.scoutingEmail}
-              </a>
+              <AboutEmailLink email={content.scoutingEmail} />
             </p>
           </section>
         </div>

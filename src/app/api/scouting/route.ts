@@ -7,9 +7,13 @@ const MAX_TOTAL_BYTES = 3.5 * 1024 * 1024;
 
 const PHOTO_KEYS = ["face", "side", "chest", "body"] as const;
 
+/** Default inbox for scouting form submissions (override with SCOUTING_EMAIL). */
+const DEFAULT_SCOUTING_RECIPIENT = "booking@lacemodel.com";
+
 function getEnv() {
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.SCOUTING_EMAIL;
+  const to =
+    process.env.SCOUTING_EMAIL?.trim() || DEFAULT_SCOUTING_RECIPIENT;
   const from = process.env.RESEND_FROM;
   return { apiKey, to, from };
 }
@@ -17,12 +21,11 @@ function getEnv() {
 export async function POST(request: NextRequest) {
   const { apiKey, to, from } = getEnv();
 
-  if (!apiKey || !to || !from) {
+  if (!apiKey || !from) {
     return NextResponse.json<ApiResponse>(
       {
         success: false,
-        error:
-          "Email is not configured. Set RESEND_API_KEY, SCOUTING_EMAIL, and RESEND_FROM.",
+        error: "Email is not configured. Set RESEND_API_KEY and RESEND_FROM.",
       },
       { status: 500 }
     );
