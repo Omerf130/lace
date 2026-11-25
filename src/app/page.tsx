@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import heroLogo from "@/images/IMG_2808.svg";
+import PublicNav from "@/components/PublicNav/PublicNav";
 import { connectToDatabase } from "@/lib/mongodb";
 import { SiteSettings } from "@/models/SiteSettings";
 import styles from "./page.module.scss";
@@ -18,6 +19,8 @@ export default async function HomePage() {
   const homeLogoText = settings?.homeLogoText?.trim() ?? "";
 
   return (
+    <>
+    <PublicNav />
     <main className={styles.hero}>
       {coverType === "video" && coverVideoUrl && (
         <video
@@ -44,7 +47,7 @@ export default async function HomePage() {
 
       <div className={styles.overlay} />
 
-      <Link href="/menu" className={styles.content}>
+      <Link href="/categories" className={styles.content}>
         {homeLogoText ? (
           <h1 className={styles.title}>{homeLogoText}</h1>
         ) : (
@@ -61,5 +64,6 @@ export default async function HomePage() {
         )}
       </Link>
     </main>
+    </>
   );
 }

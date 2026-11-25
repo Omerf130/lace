@@ -1,0 +1,74 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  display: block;
+  width: 100%;
+  max-width: 20rem;
+  text-decoration: none;
+  transition: opacity $transition-base, transform $transition-base;
+
+  &:hover {
+    opacity: 0.94;
+  }
+
+  &:active {
+    transform: scale(0.995);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text;
+    outline-offset: 4px;
+  }
+}
+
+.imageWrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: $color-background-alt;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    #e8e8e8 0%,
+    #c9c9c9 45%,
+    #b0b0b0 100%
+  );
+}
+
+.letter {
+  position: absolute;
+  inset: 0;
+  @include flex-center;
+  font-family: var(--font-vogue), Helvetica, Arial, sans-serif;
+  font-size: clamp(4.5rem, 22vw, 7.5rem);
+  font-weight: $font-weight-light;
+  color: $color-text-light;
+  text-transform: uppercase;
+  letter-spacing: $letter-spacing-widest;
+  user-select: none;
+  pointer-events: none;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

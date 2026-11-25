@@ -1,0 +1,122 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: $z-sticky;
+  padding-top: max(env(safe-area-inset-top, 0px), #{$space-3});
+  pointer-events: none;
+}
+
+.headerOverMenu {
+  z-index: $z-modal + 1;
+}
+
+.bar {
+  pointer-events: auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: $space-6;
+}
+
+.iconsLight {
+  color: $color-text-light;
+}
+
+.iconsDark {
+  color: $color-text;
+}
+
+.iconBtn {
+  @include flex-center;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: $space-2;
+  background: transparent;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  transition: opacity $transition-fast;
+  text-decoration: none;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+}
+
+.icon {
+  width: 31px;
+  height: 31px;
+
+  @include md {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+.menuScreen {
+  position: fixed;
+  inset: 0;
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(env(safe-area-inset-top, 0px) + #{$public-nav-height} + #{$space-10})
+    $space-6
+    $space-10;
+  background: $color-background;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.4s ease,
+    visibility 0.4s ease;
+  pointer-events: none;
+}
+
+.menuScreenOpen {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.menuNav {
+  @include flex-col;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(#{$space-6}, 4vh, #{$space-10});
+  width: 100%;
+  max-width: 100%;
+}
+
+.menuLink {
+  font-family: var(--font-solvera-lorvane), serif;
+  font-size: clamp(2rem, 5.5vw + 1rem, 6.25rem);
+  font-weight: $font-weight-bold;
+  letter-spacing: $letter-spacing-wide;
+  line-height: 1.05;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  color: $color-text;
+  transition: opacity $transition-base;
+
+  &:hover {
+    opacity: 0.5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-text;
+    outline-offset: 6px;
+  }
+}

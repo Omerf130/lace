@@ -59,6 +59,12 @@ export default function DashboardLayout({
             About
           </Link>
           <Link
+            href="/admin/dashboard/category-images"
+            className={`${styles.navLink} ${isActive("/admin/dashboard/category-images") ? styles.active : ""}`}
+          >
+            Category Images
+          </Link>
+          <Link
             href="/admin/dashboard/settings"
             className={`${styles.navLink} ${isActive("/admin/dashboard/settings") ? styles.active : ""}`}
           >

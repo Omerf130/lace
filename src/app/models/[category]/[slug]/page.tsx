@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { connectToDatabase } from "@/lib/mongodb";
 import { TalentModel } from "@/models/Model";
-import Navbar from "@/components/Navbar/Navbar";
+import PublicPageFrame from "@/components/PublicPageFrame/PublicPageFrame";
 import ModelGalleries from "@/components/ModelGalleries/ModelGalleries";
 import type { IModel, ModelCategory } from "@/types";
 import styles from "./page.module.scss";
@@ -55,8 +55,7 @@ export default async function ModelPage({ params }: ModelPageProps) {
   const attrs = model.attributes;
 
   return (
-    <>
-      <Navbar />
+    <PublicPageFrame>
       <main className={styles.main}>
         <h1 className={styles.name}>{fullName}</h1>
 
@@ -105,7 +104,7 @@ export default async function ModelPage({ params }: ModelPageProps) {
           alt={fullName}
         />
       </main>
-    </>
+    </PublicPageFrame>
   );
 }
 

@@ -1,10 +1,9 @@
-import Navbar from "@/components/Navbar/Navbar";
+import PublicPageFrame from "@/components/PublicPageFrame/PublicPageFrame";
 import styles from "./loading.module.scss";
 
 export default function ModelLoading() {
   return (
-    <>
-      <Navbar />
+    <PublicPageFrame>
       <main className={styles.main}>
         <div className={styles.layout}>
           <div className={styles.imageSkeleton} />
@@ -20,6 +19,6 @@ export default function ModelLoading() {
           </aside>
         </div>
       </main>
-    </>
+    </PublicPageFrame>
   );
 }

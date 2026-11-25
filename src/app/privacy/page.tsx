@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/Navbar/Navbar";
+import PublicPageFrame from "@/components/PublicPageFrame/PublicPageFrame";
 import styles from "./page.module.scss";
 
 export const metadata: Metadata = {
@@ -10,8 +10,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicyPage() {
   return (
-    <>
-      <Navbar />
+    <PublicPageFrame>
       <main className={styles.main}>
         <article className={styles.content}>
           <h1 className={styles.title}>Privacy Policy</h1>
@@ -268,6 +267,6 @@ export default function PrivacyPolicyPage() {
           </p>
         </article>
       </main>
-    </>
+    </PublicPageFrame>
   );
 }

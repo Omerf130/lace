@@ -1,4 +1,4 @@
-import Navbar from "@/components/Navbar/Navbar";
+import PublicPageFrame from "@/components/PublicPageFrame/PublicPageFrame";
 import { gmailComposeUrl } from "@/lib/gmailComposeUrl";
 import { getPageContent } from "@/lib/pageContent";
 import {
@@ -33,8 +33,7 @@ export default async function AboutPage() {
   const rest = content.teamMembers.slice(1);
 
   return (
-    <>
-      <Navbar />
+    <PublicPageFrame>
       <main className={styles.main}>
         <div className={styles.content}>
           <p className={styles.intro}>{content.intro}</p>
@@ -87,6 +86,6 @@ export default async function AboutPage() {
           </section>
         </div>
       </main>
-    </>
+    </PublicPageFrame>
   );
 }

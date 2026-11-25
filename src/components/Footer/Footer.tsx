@@ -15,7 +15,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
-        <Link href="/menu" className={styles.brand}>
+        <Link href="/" className={styles.brand}>
           <BrandMark variant="footer" />
         </Link>
 

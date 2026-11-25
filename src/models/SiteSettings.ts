@@ -6,6 +6,8 @@ export interface ISiteSettings {
   coverType?: "video" | "image";
   homeLogoText?: string;
   homeLogoImageUrl?: string;
+  categoryWomenImageUrl?: string;
+  categoryMenImageUrl?: string;
 }
 
 const SiteSettingsSchema = new Schema<ISiteSettings>(
@@ -15,6 +17,8 @@ const SiteSettingsSchema = new Schema<ISiteSettings>(
     coverType: { type: String, enum: ["video", "image", ""], default: "" },
     homeLogoText: { type: String, default: "" },
     homeLogoImageUrl: { type: String, default: "" },
+    categoryWomenImageUrl: { type: String, default: "" },
+    categoryMenImageUrl: { type: String, default: "" },
   },
   { timestamps: true }
 );

@@ -1,0 +1,121 @@
+@use "../../../../styles/variables" as *;
+@use "../../../../styles/mixins" as *;
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-tight;
+  margin-bottom: $space-3;
+}
+
+.intro {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-normal;
+  margin-bottom: $space-8;
+  max-width: 40rem;
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-8;
+
+  @include lg {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.section {
+  padding: $space-6;
+  background: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+}
+
+.sectionTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  margin-bottom: $space-4;
+}
+
+.thumbRow {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-4;
+  margin-bottom: $space-4;
+}
+
+.thumb {
+  object-fit: cover;
+  border-radius: $border-radius-sm;
+}
+
+.removeBtn {
+  padding: $space-1 $space-3;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+  background: $color-background;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-text;
+  }
+}
+
+.uploadBtn {
+  display: inline-flex;
+  align-items: center;
+  padding: $space-2 $space-5;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wider;
+  text-transform: uppercase;
+  color: $color-text;
+  background: $color-background;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
+.hidden {
+  display: none;
+}
+
+.message {
+  margin-top: $space-4;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.hint {
+  margin-top: $space-3;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.saveBtn {
+  margin-top: $space-6;
+  padding: $space-3 $space-8;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  letter-spacing: $letter-spacing-wide;
+  text-transform: uppercase;
+  color: $color-text-light;
+  background: $color-dark;
+  border: none;
+  border-radius: $border-radius-sm;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}

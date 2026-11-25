@@ -1,10 +1,9 @@
-import Navbar from "@/components/Navbar/Navbar";
+import PublicPageFrame from "@/components/PublicPageFrame/PublicPageFrame";
 import styles from "./loading.module.scss";
 
 export default function CategoryLoading() {
   return (
-    <>
-      <Navbar />
+    <PublicPageFrame>
       <main className={styles.main}>
         <div className={styles.titleSkeleton} />
         <div className={styles.grid}>
@@ -16,6 +15,6 @@ export default function CategoryLoading() {
           ))}
         </div>
       </main>
-    </>
+    </PublicPageFrame>
   );
 }

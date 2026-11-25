@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import { connectToDatabase } from "@/lib/mongodb";
 import { serializeModels } from "@/lib/serialize";
 import { TalentModel } from "@/models/Model";
-import Navbar from "@/components/Navbar/Navbar";
+import PublicPageFrame from "@/components/PublicPageFrame/PublicPageFrame";
 import ModelGrid from "@/components/ModelGrid/ModelGrid";
 import type { IModel, ModelCategory } from "@/types";
 import styles from "./page.module.scss";
@@ -50,8 +50,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   const label = category === "women" ? "Women" : "Men";
 
   return (
-    <>
-      <Navbar />
+    <PublicPageFrame>
       <main className={styles.main}>
         <h1 className={styles.title}>{label}</h1>
         <ModelGrid
@@ -61,6 +60,6 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           isAiModel={false}
         />
       </main>
-    </>
+    </PublicPageFrame>
   );
 }

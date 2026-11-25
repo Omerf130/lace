@@ -1,26 +1,5 @@
-import Link from "next/link";
-import BrandMark from "@/components/BrandMark/BrandMark";
-import { NAV_ITEMS } from "@/lib/navLinks";
-import styles from "./page.module.scss";
-
-export const metadata = {
-  title: "Menu",
-};
+import { redirect } from "next/navigation";
 
 export default function MenuPage() {
-  return (
-    <main className={styles.page}>
-      <Link href="/" className={styles.logo}>
-        <BrandMark variant="menu" />
-      </Link>
-
-      <nav className={styles.nav}>
-        {NAV_ITEMS.map((item) => (
-          <Link key={item.href} href={item.href} className={styles.navLink}>
-            {item.label}
-          </Link>
-        ))}
-      </nav>
-    </main>
-  );
+  redirect("/categories");
 }

@@ -62,3 +62,7 @@
   outline: 2px solid $color-primary;
   outline-offset: 2px;
 }
+
+@mixin public-nav-clearance {
+  padding-top: calc(env(safe-area-inset-top, 0px) + #{$public-nav-height} + #{$space-4});
+}

@@ -1,0 +1,88 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+$editorial-bg: #f7f5f1;
+$editorial-muted: #8a847c;
+$editorial-divider: #d4cec5;
+
+.main {
+  min-height: 100vh;
+  background: $editorial-bg;
+  padding-top: $space-4;
+  padding-bottom: clamp($space-12, 8vh, $space-16);
+}
+
+.container {
+  width: 100%;
+  max-width: 82.5rem;
+  margin: 0 auto;
+  padding-inline: clamp($space-5, 4vw, $space-12);
+}
+
+.masthead {
+  margin-bottom: clamp($space-10, 6vh, $space-16);
+  animation: mastheadIn 0.65s ease forwards;
+  opacity: 0;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+@keyframes mastheadIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mastheadBrand {
+  text-align: center;
+  font-family: var(--font-vogue), Helvetica, Arial, sans-serif;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: $editorial-muted;
+  margin-bottom: $space-4;
+}
+
+.mastheadRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: $space-4;
+  margin-bottom: $space-4;
+}
+
+.mastheadSide {
+  font-family: var(--font-vogue), Helvetica, Arial, sans-serif;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-normal;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: $editorial-muted;
+}
+
+.mastheadRule {
+  border: none;
+  border-top: 1px solid $editorial-divider;
+  margin: 0;
+}
+
+.editorial {
+  @include flex-col;
+  gap: 0;
+}
+
+.sectionRule {
+  border: none;
+  border-top: 1px solid $editorial-divider;
+  margin: clamp($space-10, 5vh, 3.5rem) 0;
+  width: 100%;
+}

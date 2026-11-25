@@ -1,0 +1,5 @@
+@use "../../styles/mixins" as *;
+
+.frame {
+  @include public-nav-clearance;
+}

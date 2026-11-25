@@ -1,0 +1,50 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.wrap {
+  margin-bottom: $space-4;
+}
+
+.source {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  margin-bottom: $space-2;
+  letter-spacing: $letter-spacing-wide;
+}
+
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 12.5rem;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: $color-background-alt;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    165deg,
+    #e8e8e8 0%,
+    #c9c9c9 45%,
+    #b0b0b0 100%
+  );
+}
+
+.letter {
+  position: absolute;
+  inset: 0;
+  @include flex-center;
+  font-family: var(--font-vogue), Helvetica, Arial, sans-serif;
+  font-size: 3.5rem;
+  font-weight: $font-weight-light;
+  color: $color-text-light;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
